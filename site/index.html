@@ -452,7 +452,7 @@
             <svg class="txt" viewBox="0 0 200 200"><defs><path id="ring" d="M100,100 m-88,0 a88,88 0 1,1 176,0 a88,88 0 1,1 -176,0"/></defs><text><textPath href="#ring">Detailing studio · Mangaluru · est. 2024 · hand finished ·</textPath></text></svg>
           </div>
           <div class="hud" id="hud">
-            <span class="live"><span id="carLabel">Car 1 of 3 · Black sedan</span></span>
+            <span class="live"><span id="carLabel">Car 1 of 2 · Black sedan</span></span>
             <span class="pct"><span id="pctNum">0</span>%<small>corrected</small></span>
             <span class="bar"><i id="pctBar"></i></span>
             <span class="hint" id="hint">Move across the paint to polish</span>
@@ -704,7 +704,7 @@
   var pctNum=document.getElementById('pctNum'),pctBar=document.getElementById('pctBar'),hud=document.getElementById('hud'),hint=document.getElementById('hint');
   var W,H,R,last=null,pointerDown=false,interacted=false,doneShown=false,photo=null,portrait=false;
   // three cars in the bay; "Next car" cycles through them. Only the first loads up front.
-  var cars=[{w:"assets/car-wide.jpg",t:"assets/car-tall.jpg",name:"Black sedan"},{w:"assets/car2-wide.jpg",t:"assets/car2-tall.jpg",name:"Pearl white SUV"},{w:"assets/car3-wide.jpg",t:"assets/car3-tall.jpg",name:"Midnight blue coupe"}],cur=0;
+  var cars=[{w:"assets/car-wide.jpg",t:"assets/car-tall.jpg",name:"Black sedan"},{w:"assets/car3-wide.jpg",t:"assets/car3-tall.jpg",name:"Midnight blue coupe"}],cur=0;
   var carLabel=document.getElementById('carLabel');
   function img(src){var c=img.cache||(img.cache={});if(!c[src]){c[src]=new Image();c[src].src=src}return c[src]}
   function pick(){portrait=hz.clientHeight>hz.clientWidth*1.05;return img(portrait?cars[cur].t:cars[cur].w)}
