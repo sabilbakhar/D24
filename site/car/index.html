@@ -712,16 +712,23 @@
     var ax=portrait?.5:.25,ay=portrait?.62:.55;
     c.drawImage(img,(w-dw)*ax,(h-dh)*ay,dw,dh);
   }
+  var lastW=0,lastH=0,keep=null;
   function size(){
     if(!hz.clientWidth||!hz.clientHeight){setTimeout(size,250);return}
+    var cw=hz.clientWidth,ch=hz.clientHeight;
+    if(cw===lastW&&Math.abs(ch-lastH)<140)return; // phone address bar showing or hiding: not a real resize
+    keep=null;
+    if(hz.width&&hz.height){keep=document.createElement('canvas');keep.width=hz.width;keep.height=hz.height;keep.getContext('2d').drawImage(hz,0,0)}
+    lastW=cw;lastH=ch;
     R=Math.min(devicePixelRatio||1,1.5);
-    W=cv.width=hz.width=Math.floor(hz.clientWidth*R);H=cv.height=hz.height=Math.floor(hz.clientHeight*R);
+    W=cv.width=hz.width=Math.floor(cw*R);H=cv.height=hz.height=Math.floor(ch*R);
     photo=pick();
     if(photo.complete&&photo.naturalWidth)paintAll();else photo.onload=function(){if(pick()===photo)paintAll()};
   }
   function paintAll(){
     ctx.clearRect(0,0,W,H);ctx.filter='none';cover(ctx,photo,W,H);
     paintHaze();
+    if(keep){hctx.globalCompositeOperation='destination-in';hctx.drawImage(keep,0,0,W,H);hctx.globalCompositeOperation='destination-out';keep=null}
   }
   // the neglected finish: the same car, drained of gloss, then scratched
   function paintHaze(){
@@ -755,9 +762,8 @@
     hctx.globalCompositeOperation='destination-out';
   }
 
-  var padScale=1;
   function polish(x,y){
-    var r=(matchMedia('(hover:none)').matches?54:66)*R*padScale;
+    var r=(matchMedia('(hover:none)').matches?54:66)*R;
     var b=hctx.createRadialGradient(x,y,r*.25,x,y,r);
     b.addColorStop(0,'rgba(0,0,0,.95)');b.addColorStop(.7,'rgba(0,0,0,.5)');b.addColorStop(1,'rgba(0,0,0,0)');
     hctx.fillStyle=b;hctx.beginPath();hctx.arc(x,y,r,0,6.28);hctx.fill();
@@ -823,25 +829,10 @@
   }
   setInterval(measure,400);
 
-  // first pass: the studio's own pad runs one sweep along the bonnet and doors
-  function demoSweep(){
-    var pts=portrait
-      ?[[.1,.56],[.3,.5],[.5,.55],[.7,.5],[.9,.58],[.8,.66],[.55,.62],[.3,.68],[.15,.74]]
-      :[[.3,.46],[.45,.38],[.6,.44],[.75,.36],[.9,.46],[.85,.58],[.65,.52],[.48,.62],[.36,.7]];
-    var start=null,dur=3800;
-    function at(u){var seg=u*(pts.length-1),i=Math.min(Math.floor(seg),pts.length-2),f=seg-i;return {x:(pts[i][0]+(pts[i+1][0]-pts[i][0])*f)*W,y:(pts[i][1]+(pts[i+1][1]-pts[i][1])*f)*H}}
-    padScale=1.7;
-    if(reduce){for(var u=0;u<=1;u+=.005){var p=at(u);stroke(p.x,p.y)}last=null;padScale=1;measure();return}
-    function step(ts){if(interacted){padScale=1;return}start=start||ts;var u=Math.min((ts-start)/dur,1),e=u<.5?2*u*u:-1+(4-2*u)*u;var p=at(e);stroke(p.x,p.y);if(u<1)requestAnimationFrame(step);else{last=null;padScale=1}}
-    setTimeout(function(){if(!interacted)requestAnimationFrame(step)},900);
-  }
-  document.getElementById('resetPad').addEventListener('click',function(){paintHaze();last=null;interacted=false;doneShown=false;hud.classList.remove('done');coach.classList.remove('gone');hint.textContent=hoverable?'Move across the paint to polish':'Press and hold the paint, then rub';measure();demoSweep()});
+  document.getElementById('resetPad').addEventListener('click',function(){paintHaze();last=null;interacted=false;doneShown=false;hud.classList.remove('done');coach.classList.remove('gone');hint.textContent=hoverable?'Move across the paint to polish':'Press and hold the paint, then rub';measure()});
 
   document.addEventListener('visibilitychange',function(){if(!document.hidden&&hz.width!==Math.floor(hz.clientWidth*R))size()});
   var rt;size();addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(size,150)});
-  var started=false;
-  function startWhenReady(){if(started)return;if(photo&&photo.complete&&photo.naturalWidth){started=true;demoSweep()}else setTimeout(startWhenReady,120)}
-  startWhenReady();
   
 })();
 </script>

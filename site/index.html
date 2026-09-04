@@ -694,12 +694,19 @@
   var bands=[];
   for(var i=0;i<7;i++)bands.push({x:Math.random(),y:.15+Math.random()*.7,w:.12+Math.random()*.22,h:.012+Math.random()*.02,sp:(.02+Math.random()*.05)*(i%2?1:-1),ph:Math.random()*6.28,c:i%3===0?'240,143,94':'239,228,210',a:.35+Math.random()*.4});
 
+  var lastW=0,lastH=0;
   function size(){
     if(!hz.clientWidth||!hz.clientHeight){setTimeout(size,250);return}
+    var cw=hz.clientWidth,ch=hz.clientHeight;
+    if(cw===lastW&&Math.abs(ch-lastH)<140)return; // phone address bar showing or hiding: not a real resize
+    var keep=null;
+    if(hz.width&&hz.height){keep=document.createElement('canvas');keep.width=hz.width;keep.height=hz.height;keep.getContext('2d').drawImage(hz,0,0)}
+    lastW=cw;lastH=ch;
     var r=Math.min(devicePixelRatio||1,1.5);R=r;
     W=cv.width=Math.floor(cv.clientWidth*r*.5);H=cv.height=Math.floor(cv.clientHeight*r*.5);
-    HW=hz.width=Math.floor(hz.clientWidth*r);HH=hz.height=Math.floor(hz.clientHeight*r);
+    HW=hz.width=Math.floor(cw*r);HH=hz.height=Math.floor(ch*r);
     paintHaze();
+    if(keep){hctx.globalCompositeOperation='destination-in';hctx.drawImage(keep,0,0,HW,HH);hctx.globalCompositeOperation='destination-out'}
   }
 
   // the neglected finish
@@ -771,9 +778,8 @@
   }
 
   // the pad
-  var padScale=1;
   function polish(x,y){
-    var r=(matchMedia('(hover:none)').matches?54:66)*R*padScale;
+    var r=(matchMedia('(hover:none)').matches?54:66)*R;
     var b=hctx.createRadialGradient(x,y,r*.25,x,y,r);
     b.addColorStop(0,'rgba(0,0,0,.95)');b.addColorStop(.7,'rgba(0,0,0,.5)');b.addColorStop(1,'rgba(0,0,0,0)');
     hctx.fillStyle=b;hctx.beginPath();hctx.arc(x,y,r,0,6.28);hctx.fill();
@@ -840,21 +846,11 @@
   }
   setInterval(measure,400);
 
-  // first pass: the studio's own pad runs one sweep so the panel is never just dull
-  function demoSweep(){
-    var pts=[[.04,.3],[.2,.24],[.38,.34],[.56,.26],[.74,.38],[.92,.3],[.96,.48],[.8,.56],[.62,.46],[.44,.58],[.26,.5],[.08,.6]],start=null,dur=3800;
-    function at(u){var seg=u*(pts.length-1),i=Math.min(Math.floor(seg),pts.length-2),f=seg-i;return {x:(pts[i][0]+(pts[i+1][0]-pts[i][0])*f)*HW,y:(pts[i][1]+(pts[i+1][1]-pts[i][1])*f)*HH}}
-    padScale=1.7;
-    if(reduce){for(var u=0;u<=1;u+=.005){var p=at(u);stroke(p.x,p.y)}last=null;padScale=1;measure();return}
-    function step(ts){if(interacted){padScale=1;return}start=start||ts;var u=Math.min((ts-start)/dur,1),e=u<.5?2*u*u:-1+(4-2*u)*u;var p=at(e);stroke(p.x,p.y);if(u<1)requestAnimationFrame(step);else{last=null;padScale=1}}
-    setTimeout(function(){if(!interacted)requestAnimationFrame(step)},900);
-  }
-  document.getElementById('resetPad').addEventListener('click',function(){paintHaze();last=null;interacted=false;doneShown=false;hud.classList.remove('done');coach.classList.remove('gone');hint.textContent=hoverable?'Move across the paint to polish':'Press and hold the paint, then rub';measure();demoSweep()});
+  document.getElementById('resetPad').addEventListener('click',function(){paintHaze();last=null;interacted=false;doneShown=false;hud.classList.remove('done');coach.classList.remove('gone');hint.textContent=hoverable?'Move across the paint to polish':'Press and hold the paint, then rub';measure()});
 
   function loop(){t+=.016;frame();raf=requestAnimationFrame(loop)}
   size();addEventListener('resize',function(){size();if(reduce)frame()});
   if(reduce){frame()}else{loop()}
-  demoSweep();
   document.addEventListener('visibilitychange',function(){if(reduce)return;if(document.hidden)cancelAnimationFrame(raf);else loop()});
 })();
 </script>
