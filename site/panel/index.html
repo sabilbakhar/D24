@@ -34,6 +34,10 @@
 <!-- Brand font (Cadogan) is on Adobe Fonts. Create a Web Project at fonts.adobe.com containing
      Cadogan Regular, then paste the kit link here. Until then the wordmark falls back to Caveat. -->
 <!-- <link rel="stylesheet" href="https://use.typekit.net/YOUR_KIT_ID.css"> -->
+<script>
+/* if an image request is dropped (flaky mobile networks, in-app browsers), retry it once with a fresh URL */
+document.addEventListener('error',function(e){var t=e.target;if(t&&t.tagName==='IMG'&&!t.dataset.retried){t.dataset.retried='1';setTimeout(function(){t.src=t.src.split('?')[0]+'?r='+Date.now()},700)}},true);
+</script>
 <style>
   :root{
     --ink:#15100D;
@@ -661,7 +665,7 @@
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <img src="../assets/logo-stacked.png" alt="D24 Studio logo" width="719" height="719" loading="lazy">
+        <img src="../assets/logo-stacked.png" alt="D24 Studio logo" width="719" height="719" decoding="async">
         <p style="margin-top:18px;max-width:34ch;font-family:var(--f-serif);font-style:italic;font-size:17px">An automobile detailing studio in Pandeshwar, Mangaluru. Correction, coating, protection.</p>
       </div>
       <div>
