@@ -1,0 +1,613 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>D24 Studio</title>
+<meta name="description" content="D24 Studio is an automobile detailing studio in Pandeshwar, Mangaluru. Paint correction, ceramic coating, paint protection film and interior detailing, done by hand.">
+<link rel="icon" type="image/png" href="assets/mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Caveat:wght@600;700&family=Cormorant+Garamond:ital,wght@0,500;1,400;1,500&family=Libre+Franklin:wght@400;500;600&display=swap">
+<!-- Brand font (Cadogan) is on Adobe Fonts. Create a Web Project at fonts.adobe.com containing
+     Cadogan Regular, then paste the kit link here. Until then the wordmark falls back to Caveat. -->
+<!-- <link rel="stylesheet" href="https://use.typekit.net/YOUR_KIT_ID.css"> -->
+<style>
+  :root{
+    --ink:#15100D;
+    --soot:#221A16;
+    --ash:#3A2E28;
+    --rule:rgba(239,228,210,.14);
+    --bone:#EFE4D2;
+    --dust:#A89583;
+    --kraft:#E4D5BD;
+    --kraft-deep:#D5C3A6;
+    --brand:#D9311E;
+    --ember:#BB2213;
+    --copper:#F08F5E;
+
+    --f-brand:"cadogan","Caveat","Segoe Script","Bradley Hand",cursive;
+    --f-display:"Barlow Condensed","Arial Narrow","Helvetica Neue",Arial,sans-serif;
+    --f-serif:"Cormorant Garamond","Cormorant","Garamond","Times New Roman",serif;
+    --f-body:"Libre Franklin","Franklin Gothic Medium","Helvetica Neue",Arial,sans-serif;
+
+    --w:1240px;
+    --gutter:clamp(20px,4vw,56px);
+    --ease:cubic-bezier(.2,.7,.2,1);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--ink);color:var(--bone);
+    font-family:var(--f-body);font-size:16px;line-height:1.65;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  ::selection{background:var(--brand);color:#fff}
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3{margin:0;font-weight:600;text-wrap:balance}
+  p{margin:0}
+
+  /* grain over everything: rustic film */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.07;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode:overlay;
+  }
+
+  .wrap{width:min(var(--w),100% - 2*var(--gutter));margin-inline:auto}
+
+  /* ---------- wordmark in copy ---------- */
+  .brand{white-space:nowrap;font-weight:400}
+  .brand .s{font-family:var(--f-brand);font-weight:700;color:var(--copper);font-size:1.28em;line-height:1;letter-spacing:.01em}
+  .brand .t{font-family:var(--f-display);font-weight:500;text-transform:uppercase;letter-spacing:.34em;font-size:.56em;margin-left:.45em;vertical-align:.14em;color:var(--copper)}
+  .brand.on-paper .s,.brand.on-paper .t{color:var(--ember)}
+
+  .eyebrow{
+    font-family:var(--f-display);font-weight:600;text-transform:uppercase;letter-spacing:.28em;
+    font-size:12px;color:var(--copper);display:inline-flex;align-items:center;gap:14px
+  }
+  .eyebrow::before{content:"";width:34px;height:1px;background:currentColor;opacity:.8}
+
+  .h-display{
+    font-family:var(--f-display);font-weight:700;text-transform:uppercase;line-height:.92;letter-spacing:-.005em;
+    font-size:clamp(46px,7.6vw,112px)
+  }
+  .h-section{
+    font-family:var(--f-display);font-weight:700;text-transform:uppercase;line-height:.94;
+    font-size:clamp(38px,5.2vw,72px)
+  }
+  .h-serif{font-family:var(--f-serif);font-style:italic;font-weight:400;text-transform:none;letter-spacing:0}
+  .lede{font-family:var(--f-serif);font-style:italic;font-size:clamp(20px,2vw,26px);line-height:1.4;color:var(--dust)}
+  .copy{max-width:60ch;color:var(--dust);font-size:16.5px}
+  .copy strong{color:var(--bone);font-weight:500}
+
+  .btn{
+    display:inline-flex;align-items:center;gap:12px;
+    font-family:var(--f-display);font-weight:600;text-transform:uppercase;letter-spacing:.2em;font-size:13px;
+    padding:16px 26px;border:1px solid var(--rule);color:var(--bone);
+    transition:background .3s var(--ease),color .3s var(--ease),border-color .3s var(--ease),transform .3s var(--ease);
+  }
+  .btn:hover{transform:translateY(-1px)}
+  .btn.primary{background:var(--brand);border-color:var(--brand);color:#fff}
+  .btn.primary:hover{background:var(--ember);border-color:var(--ember)}
+  .btn.ghost:hover{border-color:var(--copper);color:var(--copper)}
+  .btn svg{width:16px;height:16px}
+  .btn:focus-visible,a:focus-visible{outline:2px solid var(--copper);outline-offset:4px}
+
+  /* ---------- nav ---------- */
+  .nav{
+    position:fixed;inset:0 0 auto 0;z-index:50;
+    transition:background .4s var(--ease),border-color .4s var(--ease);
+    border-bottom:1px solid transparent;
+  }
+  .nav.solid{background:rgba(21,16,13,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom-color:var(--rule)}
+  .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:84px}
+  .nav .logo img{height:44px;width:auto}
+  .nav ul{list-style:none;margin:0;padding:0;display:flex;gap:36px}
+  .nav ul a{font-family:var(--f-display);font-weight:600;text-transform:uppercase;letter-spacing:.22em;font-size:12px;color:var(--dust);position:relative;padding:6px 0}
+  .nav ul a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;background:var(--copper);transition:right .35s var(--ease)}
+  .nav ul a:hover{color:var(--bone)}
+  .nav ul a:hover::after{right:0}
+  .nav .btn{padding:12px 20px}
+  .burger{display:none;background:none;border:1px solid var(--rule);color:var(--bone);width:44px;height:44px;cursor:pointer}
+  .burger span{display:block;width:18px;height:1px;background:currentColor;margin:4px auto}
+  @media (max-width:860px){
+    .nav ul,.nav .btn{display:none}
+    .burger{display:block}
+    .nav.open{background:var(--ink)}
+    .nav.open ul{display:flex;flex-direction:column;gap:0;position:absolute;left:0;right:0;top:84px;background:var(--ink);border-bottom:1px solid var(--rule);padding:8px var(--gutter) 20px}
+    .nav.open ul a{display:block;padding:14px 0;font-size:15px;border-top:1px solid var(--rule)}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;min-height:min(92vh,980px);display:grid;align-items:end;padding:150px 0 0;overflow:hidden;isolation:isolate}
+  .hero canvas{position:absolute;inset:0;width:100%;height:100%;z-index:-2}
+  .hero::after{content:"";position:absolute;inset:0;z-index:-1;background:
+    linear-gradient(180deg,rgba(21,16,13,.55) 0%,rgba(21,16,13,.15) 35%,rgba(21,16,13,.72) 78%,var(--ink) 100%)}
+  .hero-grid{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:40px;align-items:end;padding-bottom:64px}
+  .hero h1{max-width:12ch}
+  .hero h1 .h-serif{display:block;font-size:.62em;color:var(--copper);margin-top:.08em;padding-left:.06em}
+  .hero .lede{max-width:42ch;margin-top:30px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:38px}
+  .hero-mark{width:clamp(120px,14vw,190px);opacity:.9;justify-self:end;margin-bottom:8px;animation:spin 60s linear infinite}
+  .hero-stamp{position:relative}
+  .hero-stamp .txt{position:absolute;inset:0;animation:spin 40s linear infinite reverse}
+  .hero-stamp .txt text{font-family:var(--f-display);font-size:11.5px;letter-spacing:.32em;fill:var(--dust);text-transform:uppercase}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  .hero-foot{border-top:1px solid var(--rule);display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:22px 0 26px;font-size:13px;color:var(--dust)}
+  .hero-foot b{display:block;font-family:var(--f-display);font-weight:600;letter-spacing:.22em;text-transform:uppercase;font-size:11px;color:var(--copper);margin-bottom:6px}
+  @media (max-width:760px){
+    .hero{padding-top:120px;min-height:0}
+    .hero-grid{grid-template-columns:1fr;padding-bottom:48px}
+    .hero-mark{justify-self:start;order:-1;width:96px;margin-bottom:24px}
+    .hero-foot{grid-template-columns:1fr;gap:16px}
+  }
+
+  /* ---------- marquee ---------- */
+  .marquee{border-block:1px solid var(--rule);background:var(--soot);overflow:hidden;padding:18px 0}
+  .marquee .track{display:flex;width:max-content;animation:scroll 42s linear infinite}
+  .marquee span{font-family:var(--f-display);font-weight:600;text-transform:uppercase;letter-spacing:.3em;font-size:13px;color:var(--dust);padding:0 34px;display:flex;align-items:center;gap:34px;white-space:nowrap}
+  .marquee span::after{content:"";width:6px;height:6px;background:var(--brand);transform:rotate(45deg)}
+  @keyframes scroll{to{transform:translateX(-50%)}}
+
+  /* ---------- sections ---------- */
+  section.block{padding:clamp(88px,10vw,150px) 0}
+  .sec-head{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:48px;align-items:end;margin-bottom:clamp(44px,5vw,72px)}
+  .sec-head .eyebrow{margin-bottom:22px}
+  @media (max-width:860px){.sec-head{grid-template-columns:1fr;gap:24px}}
+
+  /* creed */
+  .creed{position:relative}
+  .creed-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(40px,6vw,96px);align-items:start}
+  .creed-mark{position:sticky;top:120px}
+  .creed-mark img{width:min(100%,360px)}
+  .creed-mark figcaption{font-family:var(--f-serif);font-style:italic;font-size:18px;color:var(--dust);margin-top:22px;max-width:30ch}
+  .creed h2 .h-serif{display:block;font-size:.72em;color:var(--copper)}
+  .creed .copy{margin-top:34px}
+  .creed .copy + .copy{margin-top:18px}
+  .tenets{list-style:none;padding:0;margin:48px 0 0;border-top:1px solid var(--rule)}
+  .tenets li{display:grid;grid-template-columns:120px 1fr;gap:24px;padding:22px 0;border-bottom:1px solid var(--rule)}
+  .tenets b{font-family:var(--f-display);font-weight:600;text-transform:uppercase;letter-spacing:.2em;font-size:12px;color:var(--copper);padding-top:4px}
+  .tenets p{color:var(--dust);max-width:52ch}
+  @media (max-width:860px){.creed-grid{grid-template-columns:1fr}.creed-mark{position:static}.tenets li{grid-template-columns:1fr;gap:6px}}
+
+  /* services: the rate card */
+  .services{background:var(--soot);border-block:1px solid var(--rule)}
+  .menu{border-top:1px solid var(--rule)}
+  .row{
+    display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1.5fr) 150px 40px;gap:28px;align-items:start;
+    padding:30px 0;border-bottom:1px solid var(--rule);position:relative;transition:padding .35s var(--ease)
+  }
+  .row::before{content:"";position:absolute;left:-14px;top:0;bottom:0;width:2px;background:var(--brand);transform:scaleY(0);transform-origin:top;transition:transform .35s var(--ease)}
+  .row:hover::before,.row:focus-within::before{transform:scaleY(1)}
+  .row:hover{padding-left:6px}
+  .row .code{font-family:var(--f-display);font-weight:600;letter-spacing:.18em;font-size:12px;color:var(--dust);padding-top:8px;font-variant-numeric:tabular-nums}
+  .row h3{font-family:var(--f-display);font-weight:600;text-transform:uppercase;font-size:clamp(24px,2.6vw,34px);line-height:1;color:var(--bone)}
+  .row h3 small{display:block;font-family:var(--f-serif);font-style:italic;text-transform:none;font-weight:400;font-size:17px;color:var(--copper);margin-top:8px;letter-spacing:0}
+  .row p{color:var(--dust);font-size:15.5px;max-width:52ch}
+  .row .time{font-family:var(--f-display);text-transform:uppercase;letter-spacing:.14em;font-size:12px;color:var(--dust);padding-top:8px;line-height:1.7}
+  .row .time b{display:block;color:var(--bone);font-size:16px;letter-spacing:.06em}
+  .row .arrow{padding-top:8px;color:var(--ash);transition:color .3s,transform .3s var(--ease)}
+  .row:hover .arrow{color:var(--copper);transform:translateX(4px)}
+  .menu-note{display:flex;gap:16px;align-items:flex-start;margin-top:28px;color:var(--dust);font-size:14px;max-width:70ch}
+  .menu-note svg{flex:none;width:18px;height:18px;color:var(--copper);margin-top:2px}
+  @media (max-width:900px){
+    .row{grid-template-columns:44px 1fr;gap:10px 18px;padding:24px 0}
+    .row p{grid-column:2}
+    .row .time{grid-column:2;display:flex;gap:18px;padding-top:4px}
+    .row .time b{display:inline}
+    .row .arrow{display:none}
+  }
+
+  /* process: a real sequence */
+  .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+  .step{padding:34px 26px 38px 0;border-right:1px solid var(--rule);position:relative;min-height:300px;display:flex;flex-direction:column}
+  .step + .step{padding-left:26px}
+  .step:last-child{border-right:0}
+  .step .n{font-family:var(--f-serif);font-style:italic;font-size:54px;line-height:1;color:var(--copper);font-variant-numeric:tabular-nums}
+  .step h3{font-family:var(--f-display);text-transform:uppercase;font-size:22px;letter-spacing:.04em;margin-top:22px;line-height:1.05}
+  .step p{color:var(--dust);font-size:14.5px;margin-top:12px}
+  .step .spec{margin-top:auto;padding-top:22px;font-family:var(--f-display);text-transform:uppercase;letter-spacing:.18em;font-size:11px;color:var(--dust)}
+  .step .spec b{color:var(--bone);font-weight:600;letter-spacing:.08em;font-size:14px}
+  @media (max-width:1000px){.steps{grid-template-columns:1fr 1fr}.step{border-right:0;border-bottom:1px solid var(--rule);min-height:0;padding:30px 0}.step + .step{padding-left:0}.step:nth-child(odd){padding-right:26px;border-right:1px solid var(--rule)}.step:nth-child(even){padding-left:26px}.step:last-child{border-bottom:0}}
+  @media (max-width:600px){.steps{grid-template-columns:1fr}.step:nth-child(odd){border-right:0;padding-right:0}.step:nth-child(even){padding-left:0}}
+
+  /* work: mosaic */
+  .work{background:var(--soot);border-block:1px solid var(--rule)}
+  .mosaic{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:clamp(150px,18vw,240px);gap:14px}
+  .tile{position:relative;overflow:hidden;background:var(--ink);border:1px solid var(--rule)}
+  .tile::before{content:"";position:absolute;inset:0;background:
+    radial-gradient(120% 80% at 20% 0%,rgba(240,143,94,.14),transparent 55%),
+    radial-gradient(80% 60% at 100% 100%,rgba(217,49,30,.16),transparent 60%)}
+  .tile .ghost{position:absolute;right:-8%;bottom:-14%;width:58%;opacity:.07;filter:grayscale(1) brightness(3)}
+  .tile figcaption{position:absolute;left:22px;right:22px;bottom:20px;display:flex;justify-content:space-between;align-items:end;gap:12px}
+  .tile figcaption em{font-family:var(--f-serif);font-style:italic;font-size:19px;color:var(--bone);line-height:1.2}
+  .tile figcaption span{font-family:var(--f-display);text-transform:uppercase;letter-spacing:.2em;font-size:11px;color:var(--copper);white-space:nowrap}
+  .tile.a{grid-column:span 7;grid-row:span 2}
+  .tile.b{grid-column:span 5}
+  .tile.c{grid-column:span 5}
+  .tile.d{grid-column:span 4}
+  .tile.e{grid-column:span 4}
+  .tile.f{grid-column:span 4}
+  .tile.cta{background:var(--kraft);color:var(--ink);display:grid;place-items:center;text-align:center;padding:24px}
+  .tile.cta::before{display:none}
+  .tile.cta .in{max-width:26ch}
+  .tile.cta b{font-family:var(--f-display);text-transform:uppercase;font-weight:700;font-size:22px;line-height:1;display:block}
+  .tile.cta p{font-family:var(--f-serif);font-style:italic;font-size:17px;color:#5a4a3c;margin-top:10px}
+  .tile.cta a{display:inline-block;margin-top:14px;font-family:var(--f-display);text-transform:uppercase;letter-spacing:.2em;font-size:12px;color:var(--ember);border-bottom:1px solid currentColor;padding-bottom:2px}
+  @media (max-width:860px){
+    .mosaic{grid-template-columns:1fr 1fr;grid-auto-rows:clamp(160px,40vw,220px)}
+    .tile.a{grid-column:span 2;grid-row:span 1}
+    .tile.b,.tile.c,.tile.d,.tile.e,.tile.f{grid-column:span 1}
+  }
+
+  /* visit: kraft ticket */
+  .visit{background:var(--kraft);color:var(--ink);position:relative}
+  .visit::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+    background-image:repeating-linear-gradient(0deg,rgba(21,16,13,.035) 0 1px,transparent 1px 7px)}
+  .visit .eyebrow{color:var(--ember)}
+  .visit .h-section{color:var(--ink)}
+  .visit .h-section .h-serif{display:block;font-size:.72em;color:var(--ember)}
+  .visit-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,460px);gap:clamp(40px,6vw,90px);align-items:start;position:relative}
+  .visit .copy{color:#5a4a3c}
+  .visit .copy strong{color:var(--ink)}
+  .ticket{background:#F3EADA;border:1px solid var(--kraft-deep);box-shadow:0 30px 60px -30px rgba(21,16,13,.45);position:relative;padding:34px 34px 30px;transform:rotate(-.6deg)}
+  .ticket::before,.ticket::after{content:"";position:absolute;left:-1px;right:-1px;height:14px;
+    background:radial-gradient(circle at 7px 0,transparent 6px,#F3EADA 6.5px) 0 0/14px 14px repeat-x}
+  .ticket::before{top:-8px;transform:rotate(180deg)}
+  .ticket::after{bottom:-8px}
+  .ticket .head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px dashed var(--kraft-deep);padding-bottom:18px}
+  .ticket .head img{height:54px}
+  .ticket .head span{font-family:var(--f-display);text-transform:uppercase;letter-spacing:.22em;font-size:11px;color:#8a7561}
+  .ticket dl{margin:0;display:grid;grid-template-columns:1fr;gap:0}
+  .ticket .kv{display:grid;grid-template-columns:110px 1fr;gap:14px;padding:16px 0;border-bottom:1px dashed var(--kraft-deep)}
+  .ticket dt{font-family:var(--f-display);text-transform:uppercase;letter-spacing:.22em;font-size:11px;color:#8a7561;padding-top:4px}
+  .ticket dd{margin:0;font-size:15.5px;line-height:1.55;color:var(--ink)}
+  .ticket dd .addr{font-weight:500}
+  .ticket dd .muted{color:#7a6754}
+  .ticket .hours{display:grid;grid-template-columns:auto 1fr;gap:4px 18px;font-variant-numeric:tabular-nums}
+  .ticket .hours i{font-style:normal;color:#7a6754}
+  .ticket .foot{display:flex;gap:12px;flex-wrap:wrap;padding-top:22px}
+  .ticket .btn{border-color:var(--ink);color:var(--ink)}
+  .ticket .btn.primary{background:var(--brand);border-color:var(--brand);color:#fff}
+  .ticket .stamp{position:absolute;right:26px;top:96px;width:92px;opacity:.55;transform:rotate(-14deg);mix-blend-mode:multiply}
+  .directions{margin-top:36px;display:grid;gap:14px;max-width:56ch}
+  .directions li{list-style:none;display:grid;grid-template-columns:22px 1fr;gap:14px;color:#5a4a3c;font-size:15.5px}
+  .directions ul{padding:0;margin:0;display:grid;gap:12px}
+  .directions svg{width:18px;height:18px;color:var(--ember);margin-top:3px}
+  @media (max-width:860px){.visit-grid{grid-template-columns:1fr}.ticket{transform:none}.ticket .stamp{display:none}}
+
+  /* closing CTA */
+  .close{position:relative;overflow:hidden;text-align:center;padding:clamp(100px,14vw,180px) 0}
+  .close::before{content:"";position:absolute;inset:0;background:
+    radial-gradient(60% 60% at 50% 100%,rgba(217,49,30,.28),transparent 70%)}
+  .close .wrap{position:relative}
+  .close .eyebrow{justify-content:center}
+  .close .eyebrow::before{display:none}
+  .close h2{font-size:clamp(44px,8vw,120px);margin-top:18px}
+  .close h2 .h-serif{display:block;font-size:.5em;color:var(--copper);margin-top:.1em}
+  .close .hero-cta{justify-content:center;margin-top:40px}
+
+  /* footer */
+  footer{border-top:1px solid var(--rule);padding:56px 0 34px;color:var(--dust);font-size:13.5px}
+  .foot-grid{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr));gap:40px;align-items:start}
+  .foot-grid img{height:120px;width:auto}
+  .foot-grid h4{margin:0 0 14px;font-family:var(--f-display);text-transform:uppercase;letter-spacing:.24em;font-size:11px;color:var(--copper);font-weight:600}
+  .foot-grid ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+  .foot-grid a:hover{color:var(--bone)}
+  .foot-bottom{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;border-top:1px solid var(--rule);margin-top:44px;padding-top:22px;font-size:12px}
+  .foot-bottom .brand{font-size:15px}
+  @media (max-width:860px){.foot-grid{grid-template-columns:1fr 1fr}.foot-grid > :first-child{grid-column:1/-1}}
+
+  /* reveal: visible at rest, animates in when it enters view */
+  .rv.in{animation:rise .9s var(--ease) both}
+  @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+  .hero .rv.in:nth-child(1){animation-delay:.05s}
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="D24 Studio home"><img src="assets/logo-horizontal.png" alt="D24 Studio"></a>
+    <nav>
+      <ul id="menu">
+        <li><a href="#creed">The studio</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#visit">Visit</a></li>
+      </ul>
+    </nav>
+    <a class="btn primary" href="https://wa.me/91XXXXXXXXXX?text=Hi%20D24%20Studio%2C%20I%27d%20like%20to%20book%20a%20detailing%20slot." target="_blank" rel="noopener">Book a slot</a>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <canvas id="paint" aria-hidden="true"></canvas>
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow rv">Automobile detailing · Pandeshwar, Mangaluru</p>
+          <h1 class="h-display rv" style="margin-top:26px">
+            Paint has a memory.
+            <span class="h-serif">We bring it back.</span>
+          </h1>
+          <p class="lede rv">Correction, coating and protection done by hand, one car at a time, under lights that show every swirl we're about to remove.</p>
+          <div class="hero-cta rv">
+            <a class="btn primary" href="https://wa.me/91XXXXXXXXXX?text=Hi%20D24%20Studio%2C%20I%27d%20like%20to%20book%20a%20detailing%20slot." target="_blank" rel="noopener">
+              Book on WhatsApp
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="btn ghost" href="#services">See the menu</a>
+          </div>
+        </div>
+        <div class="hero-mark hero-stamp" aria-hidden="true">
+          <img src="assets/mark-circle-mono.png" alt="">
+          <svg class="txt" viewBox="0 0 200 200"><defs><path id="ring" d="M100,100 m-88,0 a88,88 0 1,1 176,0 a88,88 0 1,1 -176,0"/></defs><text><textPath href="#ring">Detailing studio · Mangaluru · est. 2024 · hand finished ·</textPath></text></svg>
+        </div>
+      </div>
+      <div class="hero-foot">
+        <div><b>Find us</b>Opposite Bharath Chicken, Amrithnagar, Pandeshwar 575001</div>
+        <div><b>Studio hours</b>Mon to Sat, 9:30 to 19:00 · Sunday by appointment</div>
+        <div><b>By appointment</b>One bay, one car. We never rush a finish to fit a queue.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      <span>Paint correction</span><span>Ceramic coating</span><span>Paint protection film</span><span>Interior detailing</span><span>Engine bay</span><span>Headlight restoration</span><span>Maintenance wash</span><span>Bikes welcome</span>
+      <span>Paint correction</span><span>Ceramic coating</span><span>Paint protection film</span><span>Interior detailing</span><span>Engine bay</span><span>Headlight restoration</span><span>Maintenance wash</span><span>Bikes welcome</span>
+    </div>
+  </div>
+
+  <section class="block creed" id="creed">
+    <div class="wrap creed-grid">
+      <figure class="creed-mark rv" style="margin:0">
+        <img src="assets/mark.png" alt="The D24 mark: three chevrons pointing forward">
+        <figcaption>The mark reads like a road: three chevrons, one direction. Forward, and never back to the state it came in.</figcaption>
+      </figure>
+      <div>
+        <p class="eyebrow rv">The studio</p>
+        <h2 class="h-section rv" style="margin-top:22px">Detailing is not washing.<span class="h-serif">It's restoration, with patience.</span></h2>
+        <p class="copy rv">A wash removes dirt. Detailing removes the <strong>evidence of time</strong>: the swirl marks from automatic brushes, the water spots baked in by the Mangaluru sun, the haze on a headlight, the salt that the coast leaves on everything. <span class="brand"><span class="s">D24</span><span class="t">Studio</span></span> exists for the owner who notices those things.</p>
+        <p class="copy rv">We work under inspection lighting, measure paint before we touch it, and quote after we've seen the car, not before. It's slower. It's also the only way to promise a result.</p>
+        <ul class="tenets rv">
+          <li><b>Measured</b><p>Every panel is read with a paint depth gauge before any machine polishing. We know how much clear coat there is to work with, and we leave most of it.</p></li>
+          <li><b>Hand finished</b><p>Coatings are levelled by hand, panel by panel, and cured in the bay. Nothing leaves while it's still tacky.</p></li>
+          <li><b>Honest</b><p>If a scratch is through to primer, we'll say so and point you to a painter. We correct what correction can fix.</p></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="block services" id="services">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="eyebrow rv">The menu</p>
+          <h2 class="h-section rv">What we do to a car<span class="h-serif" style="display:block;font-size:.72em;color:var(--copper)">and how long we'll keep it.</span></h2>
+        </div>
+        <p class="copy rv">Every job begins with an inspection and a straight conversation. Durations are typical for a mid-size car in fair condition. Bikes, SUVs and neglected paint move the numbers.</p>
+      </div>
+
+      <div class="menu rv">
+        <article class="row">
+          <div class="code">PC</div>
+          <h3>Paint correction<small>One-step gloss enhancement to full multi-stage</small></h3>
+          <p>Machine polishing that removes swirls, holograms, water etching and light scratches from the clear coat, then refines the surface to a true mirror finish. Measured, staged, and stopped before it costs you paint.</p>
+          <div class="time"><b>1 to 3 days</b>Priced on inspection</div>
+          <div class="arrow"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </article>
+        <article class="row">
+          <div class="code">CC</div>
+          <h3>Ceramic coating<small>9H professional-grade, layered</small></h3>
+          <p>A hard, hydrophobic layer bonded to corrected paint. Sheds water and grime, resists chemical etching and UV fade, and keeps the finish easy to maintain for years rather than weeks. Always applied after correction, never over it.</p>
+          <div class="time"><b>2 to 3 days</b>Includes 24 h cure</div>
+          <div class="arrow"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </article>
+        <article class="row">
+          <div class="code">PPF</div>
+          <h3>Paint protection film<small>Self-healing, optically clear or satin</small></h3>
+          <p>A thick urethane film over the panels that take the hits: bonnet, bumper, mirrors, sills, door edges, or the whole car. Stone chips, key scuffs and door dings land on the film, not the paint. Edges tucked, seams hidden.</p>
+          <div class="time"><b>2 to 5 days</b>Front kit to full body</div>
+          <div class="arrow"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </article>
+        <article class="row">
+          <div class="code">ID</div>
+          <h3>Interior detailing<small>Deep clean, leather care, fabric protection</small></h3>
+          <p>Seats out where needed. Steam, extraction and brushes in every vent, seam and seat rail. Leather cleaned and conditioned, plastics restored to matte, glass cleared inside. The car smells of nothing, which is the point.</p>
+          <div class="time"><b>1 day</b>Half day for maintenance</div>
+          <div class="arrow"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </article>
+        <article class="row">
+          <div class="code">EB</div>
+          <h3>Engine bay &amp; headlights<small>Degrease, dress, restore clarity</small></h3>
+          <p>Engine bay degreased with electrics protected, then dressed to a clean factory look. Yellowed, hazy headlights wet sanded, polished and sealed with UV protection so the clarity stays.</p>
+          <div class="time"><b>Half day</b>Add-on to any service</div>
+          <div class="arrow"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </article>
+        <article class="row">
+          <div class="code">MW</div>
+          <h3>Maintenance wash<small>For cars we've coated</small></h3>
+          <p>A proper two-bucket, pH-neutral wash with a coating top-up, so the work we did keeps doing its job. No brushes, no automatic tunnels, no swirls.</p>
+          <div class="time"><b>90 minutes</b>Monthly plans available</div>
+          <div class="arrow"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </article>
+      </div>
+      <p class="menu-note rv">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+        <span>We don't publish a price list because two cars with the same badge rarely need the same work. Send photos on WhatsApp for a range, or bring the car in for a fixed quote. The inspection is free.</span>
+      </p>
+    </div>
+  </section>
+
+  <section class="block" id="process">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="eyebrow rv">The process</p>
+          <h2 class="h-section rv">Five stages.<span class="h-serif" style="display:block;font-size:.72em;color:var(--copper)">No shortcuts between them.</span></h2>
+        </div>
+        <p class="copy rv">Detailing is a sequence, and skipping a stage shows up months later as a coating that peels or a scratch that comes back. This is the order every car goes through here.</p>
+      </div>
+      <ol class="steps rv" style="list-style:none;padding:0;margin:0">
+        <li class="step"><div class="n">1</div><h3>Inspection</h3><p>Paint depth read on every panel, defects mapped under LED and swirl-finder light, plan agreed with you before anything starts.</p><div class="spec">Clear coat typical<br><b>35 to 50 µm</b></div></li>
+        <li class="step"><div class="n">2</div><h3>Decontamination</h3><p>Foam, two-bucket wash, iron remover, tar remover, clay. The surface is chemically and physically clean before a pad touches it.</p><div class="spec">Wash chemistry<br><b>pH neutral</b></div></li>
+        <li class="step"><div class="n">3</div><h3>Correction</h3><p>Compounding and polishing in stages, checked panel by panel. We remove the least paint that gives the finish you asked for.</p><div class="spec">Paint removed<br><b>Under 5 µm</b></div></li>
+        <li class="step"><div class="n">4</div><h3>Protection</h3><p>Panel wipe, then coating or film. Applied in a dust-controlled bay, levelled by hand, and left to cure. Nothing gets wet for a day.</p><div class="spec">Initial cure<br><b>24 hours</b></div></li>
+        <li class="step"><div class="n">5</div><h3>Handover</h3><p>Final inspection with you, under the same lights we started with. You leave with a care sheet and a wash schedule that suits the coast.</p><div class="spec">First maintenance<br><b>2 weeks</b></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block work" id="work">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="eyebrow rv">Recent work</p>
+          <h2 class="h-section rv">From the bay<span class="h-serif" style="display:block;font-size:.72em;color:var(--copper)">under the lights, before and after.</span></h2>
+        </div>
+        <p class="copy rv">Every car photographed on the same lift, under the same lighting, so the difference is the work and not the camera.</p>
+      </div>
+      <div class="mosaic rv">
+        <figure class="tile a" style="margin:0"><img class="ghost" src="assets/mark.png" alt=""><figcaption><em>Two-stage correction and ceramic coat, black metallic</em><span>Correction · Coating</span></figcaption></figure>
+        <figure class="tile b" style="margin:0"><img class="ghost" src="assets/mark.png" alt=""><figcaption><em>Full-front paint protection film</em><span>PPF</span></figcaption></figure>
+        <figure class="tile c" style="margin:0"><img class="ghost" src="assets/mark.png" alt=""><figcaption><em>Leather interior, brought back from grey</em><span>Interior</span></figcaption></figure>
+        <figure class="tile d" style="margin:0"><img class="ghost" src="assets/mark.png" alt=""><figcaption><em>Headlight restoration, both sides</em><span>Restoration</span></figcaption></figure>
+        <figure class="tile e" style="margin:0"><img class="ghost" src="assets/mark.png" alt=""><figcaption><em>Motorcycle tank and fairings, coated</em><span>Bike</span></figcaption></figure>
+        <figure class="tile f cta" style="margin:0"><div class="in"><b>Follow the work</b><p>New cars every week on Instagram.</p><a href="https://instagram.com/" target="_blank" rel="noopener">@d24studio</a></div></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="block visit" id="visit">
+    <div class="wrap visit-grid">
+      <div>
+        <p class="eyebrow rv">Visit the studio</p>
+        <h2 class="h-section rv" style="margin-top:22px">Pandeshwar,<span class="h-serif">a few minutes from the port.</span></h2>
+        <p class="copy rv" style="margin-top:30px">The studio is on the Amrithnagar stretch in Pandeshwar, directly opposite <strong>Bharath Chicken</strong>. Drive in, or drop the car and take a walk to the water. Drop-off and pick-up in the city can be arranged for multi-day jobs.</p>
+        <div class="directions rv">
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><span>Look for the red chevron sign. Parking is inside the compound, not on the road.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Bookings are by appointment so the bay is ready when you arrive. Walk-ins are welcome for a look and a quote.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h16v11H8l-4 4z"/></svg><span>WhatsApp is the fastest way to reach us. Send a photo of the panel you're worried about.</span></li>
+          </ul>
+        </div>
+      </div>
+      <aside class="ticket rv" aria-label="Studio details">
+        <img class="stamp" src="assets/mark-circle-mono.png" alt="">
+        <div class="head"><img src="assets/logo-horizontal.png" alt="D24 Studio"><span>Studio card</span></div>
+        <dl>
+          <div class="kv"><dt>Address</dt><dd><span class="addr">D24 Studio</span><br>Opposite Bharath Chicken<br>Amrithnagar, Pandeshwar<br>Mangaluru 575001</dd></div>
+          <div class="kv"><dt>Hours</dt><dd class="hours"><span>Mon to Sat</span><i>9:30 to 19:00</i><span>Sunday</span><i>By appointment</i></dd></div>
+          <div class="kv"><dt>Reach us</dt><dd><a href="https://wa.me/91XXXXXXXXXX" target="_blank" rel="noopener">WhatsApp the studio</a><br><span class="muted">Replies within the hour, 9:30 to 21:00</span></dd></div>
+        </dl>
+        <div class="foot">
+          <a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=D24+Studio+Opposite+Bharath+Chicken+Amrithnagar+Pandeshwar+Mangaluru+575001" target="_blank" rel="noopener">Open in Maps</a>
+          <a class="btn" href="https://wa.me/91XXXXXXXXXX" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="close">
+    <div class="wrap">
+      <p class="eyebrow rv">Book a slot</p>
+      <h2 class="h-display rv">Bring it in dull.<span class="h-serif">Drive it out new.</span></h2>
+      <div class="hero-cta rv">
+        <a class="btn primary" href="https://wa.me/91XXXXXXXXXX?text=Hi%20D24%20Studio%2C%20I%27d%20like%20to%20book%20a%20detailing%20slot." target="_blank" rel="noopener">Book on WhatsApp</a>
+        <a class="btn ghost" href="#visit">Find the studio</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <img src="assets/logo-stacked.png" alt="D24 Studio">
+        <p style="margin-top:18px;max-width:34ch;font-family:var(--f-serif);font-style:italic;font-size:17px">An automobile detailing studio in Pandeshwar, Mangaluru. Correction, coating, protection.</p>
+      </div>
+      <div>
+        <h4>Studio</h4>
+        <ul><li><a href="#creed">The studio</a></li><li><a href="#services">Services</a></li><li><a href="#process">Process</a></li><li><a href="#work">Work</a></li></ul>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <ul><li>Opposite Bharath Chicken</li><li>Amrithnagar, Pandeshwar</li><li>Mangaluru 575001</li><li><a href="https://www.google.com/maps/search/?api=1&query=D24+Studio+Opposite+Bharath+Chicken+Amrithnagar+Pandeshwar+Mangaluru+575001" target="_blank" rel="noopener">Directions</a></li></ul>
+      </div>
+      <div>
+        <h4>Talk to us</h4>
+        <ul><li><a href="https://wa.me/91XXXXXXXXXX" target="_blank" rel="noopener">WhatsApp</a></li><li><a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a></li><li><a href="mailto:hello@d24studio.in">hello@d24studio.in</a></li></ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 <span class="brand"><span class="s">D24</span><span class="t">Studio</span></span></span>
+      <span>Pandeshwar, Mangaluru · By appointment</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // nav
+  var nav=document.getElementById('nav'),burger=document.getElementById('burger');
+  function onScroll(){nav.classList.toggle('solid',window.scrollY>40)}
+  onScroll();addEventListener('scroll',onScroll,{passive:true});
+  burger.addEventListener('click',function(){var o=nav.classList.toggle('open');burger.setAttribute('aria-expanded',o)});
+  nav.querySelectorAll('#menu a').forEach(function(a){a.addEventListener('click',function(){nav.classList.remove('open')})});
+
+  // reveal (elements are visible at rest; class only triggers the entrance)
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if('IntersectionObserver' in window && !reduce){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+    document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
+  }
+
+  // hero: ceiling lights reflected on polished paint
+  var cv=document.getElementById('paint'),ctx=cv.getContext('2d'),W,H,t=0,raf;
+  var bands=[];
+  for(var i=0;i<7;i++)bands.push({x:Math.random(),y:.15+Math.random()*.7,w:.12+Math.random()*.22,h:.012+Math.random()*.02,sp:(.02+Math.random()*.05)*(i%2?1:-1),ph:Math.random()*6.28,c:i%3===0?'240,143,94':'239,228,210',a:.35+Math.random()*.4});
+  function size(){var r=Math.min(devicePixelRatio||1,1.5);W=cv.width=Math.floor(cv.clientWidth*r*.5);H=cv.height=Math.floor(cv.clientHeight*r*.5)}
+  function frame(){
+    ctx.clearRect(0,0,W,H);
+    // curved body: dark warm base with a soft crown highlight
+    var g=ctx.createLinearGradient(0,0,0,H);
+    g.addColorStop(0,'#1b1512');g.addColorStop(.45,'#2a201b');g.addColorStop(.62,'#1a1411');g.addColorStop(1,'#15100d');
+    ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+    // brand glow low left, like a red shop sign catching the flank
+    var rg=ctx.createRadialGradient(W*.18,H*.9,0,W*.18,H*.9,W*.55);
+    rg.addColorStop(0,'rgba(217,49,30,.28)');rg.addColorStop(1,'rgba(217,49,30,0)');
+    ctx.fillStyle=rg;ctx.fillRect(0,0,W,H);
+    ctx.globalCompositeOperation='lighter';
+    bands.forEach(function(b){
+      var x=((b.x+t*b.sp)%1+1)%1,cx=x*W,cy=(b.y+Math.sin(t*.6+b.ph)*.02)*H,bw=b.w*W,bh=b.h*H;
+      var a=b.a*(0.7+0.3*Math.sin(t*.8+b.ph));
+      var lg=ctx.createLinearGradient(cx-bw,cy,cx+bw,cy);
+      lg.addColorStop(0,'rgba('+b.c+',0)');lg.addColorStop(.5,'rgba('+b.c+','+a+')');lg.addColorStop(1,'rgba('+b.c+',0)');
+      ctx.fillStyle=lg;
+      ctx.save();ctx.translate(cx,cy);ctx.rotate(-.06);
+      ctx.filter='blur('+Math.max(2,bh*.9)+'px)';
+      ctx.fillRect(-bw,-bh/2,bw*2,bh);
+      ctx.restore();
+    });
+    ctx.globalCompositeOperation='source-over';
+  }
+  function loop(){t+=.016;frame();raf=requestAnimationFrame(loop)}
+  size();addEventListener('resize',function(){size();if(reduce)frame()});
+  if(reduce){frame()}else{loop()}
+  document.addEventListener('visibilitychange',function(){if(reduce)return;if(document.hidden)cancelAnimationFrame(raf);else loop()});
+})();
+</script>
+</body>
+</html>
