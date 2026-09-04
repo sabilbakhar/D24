@@ -700,7 +700,7 @@
     var cw=hz.clientWidth,ch=hz.clientHeight;
     if(cw===lastW&&Math.abs(ch-lastH)<140)return; // phone address bar showing or hiding: not a real resize
     var keep=null;
-    if(hz.width&&hz.height){keep=document.createElement('canvas');keep.width=hz.width;keep.height=hz.height;keep.getContext('2d').drawImage(hz,0,0)}
+    if(lastW>0){keep=document.createElement('canvas');keep.width=hz.width;keep.height=hz.height;keep.getContext('2d').drawImage(hz,0,0)}
     lastW=cw;lastH=ch;
     var r=Math.min(devicePixelRatio||1,1.5);R=r;
     W=cv.width=Math.floor(cv.clientWidth*r*.5);H=cv.height=Math.floor(cv.clientHeight*r*.5);
