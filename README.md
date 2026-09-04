@@ -6,7 +6,6 @@ Website for D24 Studio, an automobile detailing studio in Pandeshwar, Mangaluru.
 - Root PNGs — original logo exports.
 
 ## Before going live
-- Replace `91XXXXXXXXXX` in `site/index.html` with the studio WhatsApp number.
 - Update the Instagram link and email in the footer.
 - Add the Adobe Fonts kit link for Cadogan (see the comment near the top of `index.html`).
 - Drop photographs into the "From the bay" tiles.
