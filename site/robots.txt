@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /panel/
 
-Sitemap: https://d24-studio.vercel.app/sitemap.xml
+Sitemap: https://www.d24.studio/sitemap.xml
