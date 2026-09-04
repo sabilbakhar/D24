@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="D24 Studio">
 <meta property="og:locale" content="en_IN">
-<meta property="og:url" content="https://d24-studio.vercel.app/car/">
+<meta property="og:url" content="https://d24-studio.vercel.app/panel/">
 <meta property="og:title" content="D24 Studio | Car Detailing, Ceramic Coating &amp; PPF in Mangaluru">
 <meta property="og:description" content="Paint has a memory. We bring it back. Paint correction, ceramic coating and paint protection film in Pandeshwar, Mangaluru.">
 <meta property="og:image" content="https://d24-studio.vercel.app/assets/car-wide.jpg">
@@ -28,8 +28,6 @@
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": ["AutomotiveBusiness", "LocalBusiness"], "@id": "https://d24-studio.vercel.app/#studio", "name": "D24 Studio", "alternateName": "D24 Studio Mangaluru", "description": "Automobile detailing studio in Pandeshwar, Mangaluru: paint correction, ceramic coating, paint protection film (PPF), interior detailing, engine bay cleaning and headlight restoration.", "url": "https://d24-studio.vercel.app/", "image": "https://d24-studio.vercel.app/assets/car-wide.jpg", "logo": "https://d24-studio.vercel.app/assets/logo-stacked.png", "priceRange": "₹₹", "address": {"@type": "PostalAddress", "streetAddress": "Opposite Bharath Chicken, Amrithnagar, Pandeshwar", "addressLocality": "Mangaluru", "addressRegion": "Karnataka", "postalCode": "575001", "addressCountry": "IN"}, "areaServed": [{"@type": "City", "name": "Mangaluru"}, {"@type": "City", "name": "Udupi"}, {"@type": "City", "name": "Manipal"}], "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], "opens": "09:30", "closes": "19:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "00:00", "closes": "00:00", "description": "By appointment"}], "hasOfferCatalog": {"@type": "OfferCatalog", "name": "Detailing services", "itemListElement": [{"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Paint correction", "description": "Machine polishing that removes swirl marks, holograms, water etching and light scratches from the clear coat."}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Ceramic coating", "description": "Professional-grade 9H ceramic coating applied after correction, with a 24 hour cure."}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Paint protection film (PPF)", "description": "Self-healing urethane film for bonnet, bumper, mirrors, sills or full body."}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Interior detailing", "description": "Deep clean, steam and extraction, leather care and fabric protection."}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Engine bay and headlight restoration", "description": "Engine bay degrease and dressing; headlight wet sanding, polishing and UV sealing."}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Maintenance wash", "description": "Two-bucket pH-neutral wash with coating top-up for coated cars."}}]}, "sameAs": ["https://instagram.com/"]}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the difference between car detailing and a car wash?", "acceptedAnswer": {"@type": "Answer", "text": "A wash removes dirt. Detailing restores the surface: swirl marks, water spots and oxidation are polished out of the clear coat, then the paint is protected with a ceramic coating or film. It takes hours or days, not minutes."}}, {"@type": "Question", "name": "How long does a ceramic coating last?", "acceptedAnswer": {"@type": "Answer", "text": "A professionally applied coating on corrected paint typically protects for two to five years, depending on the product, how the car is washed and how much sun and salt it sees. Maintenance washes every few weeks keep it performing."}}, {"@type": "Question", "name": "How long will you keep my car?", "acceptedAnswer": {"@type": "Answer", "text": "Paint correction takes one to three days. Ceramic coating adds a 24 hour cure. Paint protection film takes two to five days depending on coverage. Interior detailing is usually a single day. We confirm timing after inspecting the car."}}, {"@type": "Question", "name": "Can you remove deep scratches?", "acceptedAnswer": {"@type": "Answer", "text": "If the scratch is in the clear coat, yes. If your fingernail catches in it, it has usually gone through to the primer and needs paint, not polishing. We will tell you honestly at inspection."}}, {"@type": "Question", "name": "Where is D24 Studio and do I need an appointment?", "acceptedAnswer": {"@type": "Answer", "text": "We are in Amrithnagar, Pandeshwar, Mangaluru 575001, directly opposite Bharath Chicken. Work is by appointment so the bay is ready for you, but you are welcome to walk in for an inspection and a quote."}}]}</script>
 <link rel="icon" type="image/png" href="../assets/mark.png">
-<link rel="preload" as="image" href="../assets/car-wide.jpg" media="(min-aspect-ratio: 20/21)">
-<link rel="preload" as="image" href="../assets/car-tall.jpg" media="(max-aspect-ratio: 20/21)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Caveat:wght@600;700&family=Cormorant+Garamond:ital,wght@0,500;1,400;1,500&family=Libre+Franklin:wght@400;500;600&display=swap">
@@ -144,17 +142,16 @@
     .nav.open ul a{display:block;padding:14px 0;font-size:15px;border-top:1px solid var(--rule)}
   }
 
-  /* ---------- hero (car version) ---------- */
-  .hero{position:relative;min-height:min(94vh,1000px);display:grid;align-items:end;padding:150px 0 0;overflow:hidden;isolation:isolate;cursor:none;background:var(--ink)}
+  /* ---------- hero ---------- */
+  .hero{position:relative;min-height:min(92vh,980px);display:grid;align-items:end;padding:150px 0 0;overflow:hidden;isolation:isolate;cursor:none}
   .hero canvas{position:absolute;inset:0;width:100%;height:100%;z-index:-2}
   .hero #haze{z-index:-1}
   .hero::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:
-    linear-gradient(180deg,rgba(21,16,13,.6) 0%,rgba(21,16,13,0) 26%,rgba(21,16,13,0) 62%,rgba(21,16,13,.78) 88%,var(--ink) 100%),
-    linear-gradient(90deg,rgba(21,16,13,.92) 0%,rgba(21,16,13,.72) 26%,rgba(21,16,13,.3) 48%,rgba(21,16,13,0) 64%),
-    radial-gradient(60% 50% at 100% 100%,rgba(21,16,13,.7),transparent 70%)}
+    linear-gradient(180deg,rgba(21,16,13,.5) 0%,rgba(21,16,13,.08) 30%,rgba(21,16,13,.62) 74%,var(--ink) 100%)}
   .hero .wrap{position:relative;z-index:1;pointer-events:none}
   .hero .wrap a,.hero .wrap button{pointer-events:auto}
   .hero a,.hero button{cursor:pointer}
+  /* the polishing pad that follows the pointer */
   .pad{position:absolute;left:0;top:0;width:96px;height:96px;margin:-48px 0 0 -48px;z-index:2;pointer-events:none;opacity:0;transition:opacity .25s;will-change:transform}
   .pad.show{opacity:1}
   .pad .ring{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(240,143,94,.75);box-shadow:0 0 0 10px rgba(240,143,94,.06),inset 0 0 24px rgba(240,143,94,.12);animation:spin 1.4s linear infinite}
@@ -162,6 +159,30 @@
   .pad img{position:absolute;left:50%;top:50%;width:38px;transform:translate(-50%,-50%);filter:drop-shadow(0 0 6px rgba(217,49,30,.6))}
   .pad.down .ring{border-color:var(--brand);box-shadow:0 0 0 14px rgba(217,49,30,.1),inset 0 0 30px rgba(217,49,30,.25)}
   @media (hover:none){.hero{cursor:auto}.pad{display:none}.pad.down{display:block}}
+  /* live readout */
+  .hud{display:flex;flex-direction:column;align-items:flex-end;gap:10px;margin-top:22px;font-family:var(--f-display);text-transform:uppercase;letter-spacing:.22em;font-size:11px;color:var(--dust)}
+  .hud .live{display:flex;align-items:center;gap:10px}
+  .hud .live::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--brand);box-shadow:0 0 10px var(--brand);animation:blink 1.6s ease-in-out infinite}
+  @keyframes blink{50%{opacity:.25}}
+  .hud .pct{font-size:52px;line-height:1;letter-spacing:.02em;color:var(--bone);font-weight:700;font-variant-numeric:tabular-nums}
+  .hud .pct small{font-size:14px;letter-spacing:.2em;color:var(--copper);margin-left:8px;font-weight:600}
+  .hud .bar{width:190px;height:2px;background:var(--rule);position:relative;overflow:hidden}
+  .hud .bar i{position:absolute;inset:0;right:100%;background:var(--copper);transition:right .4s var(--ease)}
+  .hud .hint{color:var(--copper);letter-spacing:.2em}
+  .hud button{background:none;border:0;padding:0;color:var(--dust);font:inherit;letter-spacing:inherit;text-transform:inherit;border-bottom:1px solid var(--rule);cursor:pointer}
+  .hud button:hover{color:var(--bone);border-color:var(--copper)}
+  .hud.done .pct{color:var(--copper)}
+  @media (max-width:760px){.hud{align-items:flex-start;margin-top:26px}}
+  .hero-grid{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:40px;align-items:end;padding-bottom:64px}
+  .hero h1{max-width:12ch}
+  .hero h1 .h-serif{display:block;font-size:.62em;color:var(--copper);margin-top:.08em;padding-left:.06em}
+  .hero .lede{max-width:42ch;margin-top:30px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:38px}
+  .hero-mark{width:clamp(120px,14vw,190px);opacity:.9;justify-self:end;margin-bottom:8px}
+  .hero-mark > img{animation:spin 60s linear infinite}
+  .hero-stamp{position:relative}
+  .hero-stamp .txt{position:absolute;left:0;top:0;width:100%;aspect-ratio:1;animation:spin 40s linear infinite reverse}
+  .hero-stamp .txt text{font-family:var(--f-display);font-size:11.5px;letter-spacing:.32em;fill:var(--dust);text-transform:uppercase}
 
   /* phones: show the gesture before anything else */
   .coach,.touch-only{display:none}
@@ -178,49 +199,13 @@
   @keyframes coachPulse{0%{box-shadow:0 0 0 0 rgba(240,143,94,.6)}100%{box-shadow:0 0 0 24px rgba(240,143,94,0)}}
   @keyframes spin{to{transform:rotate(360deg)}}
 
-  .hero-grid{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:40px;align-items:end;padding-bottom:64px}
-  .hero h1{max-width:12ch;text-shadow:0 2px 30px rgba(21,16,13,.8)}
-  .hero h1 .h-serif{display:block;font-size:.62em;color:var(--copper);margin-top:.08em;padding-left:.06em}
-  .hero .lede{max-width:30ch;margin-top:24px;color:#d6c4ae;text-shadow:0 1px 20px rgba(21,16,13,.9)}
-  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:32px}
-  .hero-side{display:flex;flex-direction:column;align-items:flex-end;gap:26px}
-  .hero-mark{width:clamp(120px,14vw,190px);opacity:.9;position:relative}
-  .hero-mark > img{animation:spin 60s linear infinite;filter:drop-shadow(0 0 18px rgba(21,16,13,.9))}
-  .hero-stamp .txt{position:absolute;left:0;top:0;width:100%;aspect-ratio:1;animation:spin 40s linear infinite reverse}
-  .hero-stamp .txt text{font-family:var(--f-display);font-size:11.5px;letter-spacing:.32em;fill:var(--dust);text-transform:uppercase}
-
-  .hud{display:flex;flex-direction:column;align-items:flex-end;gap:8px;font-family:var(--f-display);text-transform:uppercase;letter-spacing:.22em;font-size:11px;color:var(--dust);text-shadow:0 1px 14px rgba(21,16,13,.9)}
-  .hud .live{display:flex;align-items:center;gap:10px}
-  .hud .live::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--brand);box-shadow:0 0 10px var(--brand);animation:blink 1.6s ease-in-out infinite}
-  @keyframes blink{50%{opacity:.25}}
-  .hud .pct{font-size:52px;line-height:1;letter-spacing:.02em;color:var(--bone);font-weight:700;font-variant-numeric:tabular-nums}
-  .hud .pct small{font-size:14px;letter-spacing:.2em;color:var(--copper);margin-left:8px;font-weight:600}
-  .hud .bar{width:190px;height:2px;background:rgba(239,228,210,.22);position:relative;overflow:hidden}
-  .hud .bar i{position:absolute;inset:0;right:100%;background:var(--copper);transition:right .4s var(--ease)}
-  .hud .hint{color:var(--copper);letter-spacing:.2em}
-  .hud button{background:none;border:0;padding:0;color:var(--dust);font:inherit;letter-spacing:inherit;text-transform:inherit;border-bottom:1px solid var(--rule);cursor:pointer}
-  .hud button:hover{color:var(--bone);border-color:var(--copper)}
-  .hud.done .pct{color:var(--copper)}
-
-
-  /* phones: headline sits in the dark space above the car, readout becomes one compact row */
+  .hero-foot{border-top:1px solid var(--rule);display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:22px 0 26px;font-size:13px;color:var(--dust)}
+  .hero-foot b{display:block;font-family:var(--f-display);font-weight:600;letter-spacing:.22em;text-transform:uppercase;font-size:11px;color:var(--copper);margin-bottom:6px}
   @media (max-width:760px){
-    .hero{padding-top:104px;min-height:100svh;align-items:start}
-    .hero::after{background:linear-gradient(180deg,rgba(21,16,13,.92) 0%,rgba(21,16,13,.78) 30%,rgba(21,16,13,.25) 46%,rgba(21,16,13,0) 58%,rgba(21,16,13,0) 76%,rgba(21,16,13,.85) 92%,var(--ink) 100%)}
-    .hero-grid{grid-template-columns:1fr;gap:0;padding-bottom:0;min-height:calc(100svh - 104px);grid-template-rows:auto 1fr auto}
-    .hero h1{font-size:clamp(40px,12.5vw,58px)}
-    .hero .lede{font-size:18px;margin-top:18px;max-width:30ch}
-    .hero-cta{margin-top:24px}
-    .hero-cta .btn{padding:14px 18px;font-size:12px}
-    .hud{grid-row:3;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px;align-self:end;padding:14px 0 18px;border-top:1px solid var(--rule)}
-    .hud .live{order:1;flex:1 1 100%}
-    .hud .pct{order:2;font-size:34px}
-    .hud .bar{order:3;flex:1 1 90px;width:auto}
-    .hud .hint{order:4;flex:1 1 100%;font-size:10px}
-    .hud button{order:5}
-    .hero-side{display:contents}
-    .hero-mark{position:absolute;right:var(--gutter);top:92px;width:74px;opacity:.85}
-    .hero-stamp .txt{display:none}
+    .hero{padding-top:120px;min-height:0}
+    .hero-grid{grid-template-columns:1fr;padding-bottom:48px}
+    .hero-mark{justify-self:start;order:-1;width:96px;margin-bottom:24px}
+    .hero-foot{grid-template-columns:1fr;gap:16px}
   }
 
   /* ---------- marquee ---------- */
@@ -423,7 +408,7 @@
 <main id="top">
   <section class="hero">
     <canvas id="paint" aria-hidden="true"></canvas>
-    <canvas id="haze" aria-label="A dark sedan in the studio, paint dull and swirled. Move across it to polish it." role="img"></canvas>
+    <canvas id="haze" aria-label="Interactive paint panel. Move across it to polish the paint." role="img"></canvas>
     <div class="pad" id="pad" aria-hidden="true"><div class="ring"></div><img id="padImg" src="../assets/mark.png" alt=""></div>
     <div class="coach" id="coach" aria-hidden="true">
       <span class="cring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11.5V5.5a1.5 1.5 0 0 1 3 0v5"/><path d="M12 10.5V9a1.5 1.5 0 0 1 3 0v2.5"/><path d="M15 11a1.5 1.5 0 0 1 3 0v1.5"/><path d="M18 12.5a1.5 1.5 0 0 1 3 0V16a6 6 0 0 1-6 6h-2.2a6 6 0 0 1-4.9-2.5l-3.3-4.6a1.6 1.6 0 0 1 2.5-2L9 15"/></svg></span>
@@ -433,11 +418,11 @@
       <div class="hero-grid">
         <div>
           <p class="eyebrow rv">Car detailing studio · Pandeshwar, Mangaluru</p>
-          <h1 class="h-display rv" style="margin-top:22px">
+          <h1 class="h-display rv" style="margin-top:26px">
             Paint has a memory.
             <span class="h-serif">We bring it back.</span>
           </h1>
-          <p class="lede rv"><span class="mouse-only">Run the pad over the paint.</span><span class="touch-only">Hold the paint and rub it clean.</span></p>
+          <p class="lede rv"><span class="mouse-only">This panel came in swirled and dull. Run the pad over it and watch the paint come back.</span><span class="touch-only">This panel came in swirled and dull. Hold it and rub, and watch the paint come back.</span></p>
           <div class="hero-cta rv">
             <a class="btn primary" href="https://wa.me/91XXXXXXXXXX?text=Hi%20D24%20Studio%2C%20I%27d%20like%20to%20book%20a%20detailing%20slot." target="_blank" rel="noopener">
               Book on WhatsApp
@@ -446,19 +431,22 @@
             <a class="btn ghost" href="#services">See the menu</a>
           </div>
         </div>
-        <div class="hero-side">
-          <div class="hero-mark hero-stamp" aria-hidden="true">
-            <img src="../assets/mark-circle-mono.png" alt="">
-            <svg class="txt" viewBox="0 0 200 200"><defs><path id="ring" d="M100,100 m-88,0 a88,88 0 1,1 176,0 a88,88 0 1,1 -176,0"/></defs><text><textPath href="#ring">Detailing studio · Mangaluru · est. 2024 · hand finished ·</textPath></text></svg>
-          </div>
+        <div class="hero-mark hero-stamp" aria-hidden="true">
+          <img src="../assets/mark-circle-mono.png" alt="">
+          <svg class="txt" viewBox="0 0 200 200"><defs><path id="ring" d="M100,100 m-88,0 a88,88 0 1,1 176,0 a88,88 0 1,1 -176,0"/></defs><text><textPath href="#ring">Detailing studio · Mangaluru · est. 2024 · hand finished ·</textPath></text></svg>
           <div class="hud" id="hud">
-            <span class="live">Live</span>
+            <span class="live">Paint correction · live</span>
             <span class="pct"><span id="pctNum">0</span>%<small>corrected</small></span>
             <span class="bar"><i id="pctBar"></i></span>
             <span class="hint" id="hint">Move across the paint to polish</span>
-            <button type="button" id="resetPad">Next car</button>
+            <button type="button" id="resetPad">Bring in the next car</button>
           </div>
         </div>
+      </div>
+      <div class="hero-foot">
+        <div><b>Find us</b>Opposite Bharath Chicken, Amrithnagar, Pandeshwar 575001</div>
+        <div><b>Studio hours</b>Mon to Sat, 9:30 to 19:00 · Sunday by appointment</div>
+        <div><b>By appointment</b>One bay, one car. We never rush a finish to fit a queue.</div>
       </div>
     </div>
   </section>
@@ -694,74 +682,102 @@
     document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
   }
 
-  /* ---------- hero (car version): a photographed car you polish back to gloss ----------
-     #paint = the car as it leaves: the photograph, full colour and gloss
-     #haze  = the car as it arrived: same photograph, drained and milky, with swirl marks on top
-     Pointer = a polishing pad. Moving it cuts through #haze and reveals #paint.              */
+  /* ---------- hero: a swirled panel you polish back to gloss ----------
+     #paint  = the corrected finish (ceiling lights drifting over dark paint, the D24 sign reflected)
+     #haze   = the neglected finish on top (dull film + swirl marks + water spots)
+     Pointer = a polishing pad. Moving it cuts through #haze and reveals #paint.        */
   var hero=document.querySelector('.hero'),cv=document.getElementById('paint'),ctx=cv.getContext('2d');
   var hz=document.getElementById('haze'),hctx=hz.getContext('2d');
   var pad=document.getElementById('pad'),markImg=document.getElementById('padImg');
   var pctNum=document.getElementById('pctNum'),pctBar=document.getElementById('pctBar'),hud=document.getElementById('hud'),hint=document.getElementById('hint');
-  var W,H,R,last=null,pointerDown=false,interacted=false,doneShown=false,photo=null,portrait=false;
-  var wide=new Image(),tall=new Image();wide.src="../assets/car-wide.jpg";tall.src="../assets/car-tall.jpg";
+  var W,H,HW,HH,R,t=0,raf,last=null,pointerDown=false,interacted=false,doneShown=false;
+  var bands=[];
+  for(var i=0;i<7;i++)bands.push({x:Math.random(),y:.15+Math.random()*.7,w:.12+Math.random()*.22,h:.012+Math.random()*.02,sp:(.02+Math.random()*.05)*(i%2?1:-1),ph:Math.random()*6.28,c:i%3===0?'240,143,94':'239,228,210',a:.35+Math.random()*.4});
 
-  function pick(){portrait=hz.clientHeight>hz.clientWidth*1.05;return portrait?tall:wide}
-  // object-fit: cover, anchored where the car is
-  function cover(c,img,w,h){
-    var s=Math.max(w/img.naturalWidth,h/img.naturalHeight),dw=img.naturalWidth*s,dh=img.naturalHeight*s;
-    var ax=portrait?.5:.25,ay=portrait?.62:.55;
-    c.drawImage(img,(w-dw)*ax,(h-dh)*ay,dw,dh);
-  }
-  var lastW=0,lastH=0,keep=null;
+  var lastW=0,lastH=0;
   function size(){
     if(!hz.clientWidth||!hz.clientHeight){setTimeout(size,250);return}
     var cw=hz.clientWidth,ch=hz.clientHeight;
     if(cw===lastW&&Math.abs(ch-lastH)<140)return; // phone address bar showing or hiding: not a real resize
-    keep=null;
+    var keep=null;
     if(lastW>0){keep=document.createElement('canvas');keep.width=hz.width;keep.height=hz.height;keep.getContext('2d').drawImage(hz,0,0)}
     lastW=cw;lastH=ch;
-    R=Math.min(devicePixelRatio||1,1.5);
-    W=cv.width=hz.width=Math.floor(cw*R);H=cv.height=hz.height=Math.floor(ch*R);
-    photo=pick();
-    if(photo.complete&&photo.naturalWidth)paintAll();else photo.onload=function(){if(pick()===photo)paintAll()};
-  }
-  function paintAll(){
-    ctx.clearRect(0,0,W,H);ctx.filter='none';cover(ctx,photo,W,H);
+    var r=Math.min(devicePixelRatio||1,1.5);R=r;
+    W=cv.width=Math.floor(cv.clientWidth*r*.5);H=cv.height=Math.floor(cv.clientHeight*r*.5);
+    HW=hz.width=Math.floor(cw*r);HH=hz.height=Math.floor(ch*r);
     paintHaze();
-    if(keep){hctx.globalCompositeOperation='destination-in';hctx.drawImage(keep,0,0,W,H);hctx.globalCompositeOperation='destination-out';keep=null}
+    if(keep){hctx.globalCompositeOperation='destination-in';hctx.drawImage(keep,0,0,HW,HH);hctx.globalCompositeOperation='destination-out'}
   }
-  // the neglected finish: the same car, drained of gloss, then scratched
+
+  // the neglected finish
   function paintHaze(){
     hctx.globalCompositeOperation='source-over';
-    hctx.clearRect(0,0,W,H);
-    hctx.filter='grayscale(.85) brightness(1.15) contrast(.72)';
-    cover(hctx,photo,W,H);
-    hctx.filter='none';
-    hctx.fillStyle='rgba(122,110,98,.42)';hctx.fillRect(0,0,W,H);
-    var bl=hctx.createRadialGradient(W*.6,H*.4,0,W*.6,H*.4,W*.6);
-    bl.addColorStop(0,'rgba(160,150,138,.22)');bl.addColorStop(1,'rgba(160,150,138,0)');
-    hctx.fillStyle=bl;hctx.fillRect(0,0,W,H);
-    var n=Math.floor(W*H/1000);
+    hctx.clearRect(0,0,HW,HH);
+    var g=hctx.createLinearGradient(0,0,0,HH);
+    g.addColorStop(0,'rgba(74,66,60,.97)');g.addColorStop(.5,'rgba(92,82,74,.97)');g.addColorStop(1,'rgba(58,50,45,.98)');
+    hctx.fillStyle=g;hctx.fillRect(0,0,HW,HH);
+    // oxidised bloom
+    var bl=hctx.createRadialGradient(HW*.6,HH*.35,0,HW*.6,HH*.35,HW*.6);
+    bl.addColorStop(0,'rgba(150,140,128,.28)');bl.addColorStop(1,'rgba(150,140,128,0)');
+    hctx.fillStyle=bl;hctx.fillRect(0,0,HW,HH);
+    // swirl marks: thousands of short arcs from automatic brushes
+    var n=Math.floor(HW*HH/900);
     hctx.lineCap='round';
     for(var i=0;i<n;i++){
-      var x=Math.random()*W,y=Math.random()*H,rad=8*R+Math.random()*220*R,st=Math.random()*6.28,len=.15+Math.random()*.7,bright=Math.random()<.06;
+      var x=Math.random()*HW,y=Math.random()*HH,rad=8*R+Math.random()*220*R,st=Math.random()*6.28,len=.15+Math.random()*.7;
+      var bright=Math.random()<.06;
       hctx.strokeStyle=bright?'rgba(235,225,210,'+(.28+Math.random()*.3)+')':'rgba(225,215,200,'+(.05+Math.random()*.11)+')';
       hctx.lineWidth=(bright?1.1:.7)*R;
       hctx.beginPath();hctx.arc(x,y,rad,st,st+len);hctx.stroke();
     }
-    for(var j=0;j<Math.floor(W/60);j++){
-      var sx=Math.random()*W,sy=Math.random()*H,ang=(Math.random()-.5)*.9,l=40*R+Math.random()*260*R;
+    // straight scratches
+    for(var j=0;j<Math.floor(HW/60);j++){
+      var sx=Math.random()*HW,sy=Math.random()*HH,ang=(Math.random()-.5)*.9,l=40*R+Math.random()*260*R;
       hctx.strokeStyle='rgba(240,232,220,'+(.15+Math.random()*.3)+')';hctx.lineWidth=(.6+Math.random()*.8)*R;
       hctx.beginPath();hctx.moveTo(sx,sy);hctx.lineTo(sx+Math.cos(ang)*l,sy+Math.sin(ang)*l);hctx.stroke();
     }
-    for(var k=0;k<Math.floor(W*H/26000);k++){
-      var wx=Math.random()*W,wy=Math.random()*H,wr=(3+Math.random()*9)*R;
+    // water spots
+    for(var k=0;k<Math.floor(HW*HH/26000);k++){
+      var wx=Math.random()*HW,wy=Math.random()*HH,wr=(3+Math.random()*9)*R;
       hctx.strokeStyle='rgba(230,222,208,'+(.12+Math.random()*.2)+')';hctx.lineWidth=.8*R;
       hctx.beginPath();hctx.arc(wx,wy,wr,0,6.28);hctx.stroke();
     }
     hctx.globalCompositeOperation='destination-out';
   }
 
+  // the corrected finish
+  function frame(){
+    ctx.clearRect(0,0,W,H);
+    var g=ctx.createLinearGradient(0,0,0,H);
+    g.addColorStop(0,'#1b1512');g.addColorStop(.45,'#2a201b');g.addColorStop(.62,'#1a1411');g.addColorStop(1,'#15100d');
+    ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+    var rg=ctx.createRadialGradient(W*.18,H*.9,0,W*.18,H*.9,W*.55);
+    rg.addColorStop(0,'rgba(217,49,30,.3)');rg.addColorStop(1,'rgba(217,49,30,0)');
+    ctx.fillStyle=rg;ctx.fillRect(0,0,W,H);
+    ctx.globalCompositeOperation='lighter';
+    bands.forEach(function(b){
+      var x=((b.x+t*b.sp)%1+1)%1,cx=x*W,cy=(b.y+Math.sin(t*.6+b.ph)*.02)*H,bw=b.w*W,bh=b.h*H;
+      var a=b.a*(0.7+0.3*Math.sin(t*.8+b.ph));
+      var lg=ctx.createLinearGradient(cx-bw,cy,cx+bw,cy);
+      lg.addColorStop(0,'rgba('+b.c+',0)');lg.addColorStop(.5,'rgba('+b.c+','+a+')');lg.addColorStop(1,'rgba('+b.c+',0)');
+      ctx.fillStyle=lg;
+      ctx.save();ctx.translate(cx,cy);ctx.rotate(-.06);
+      ctx.filter='blur('+Math.max(2,bh*.9)+'px)';
+      ctx.fillRect(-bw,-bh/2,bw*2,bh);
+      ctx.restore();
+    });
+    // the studio sign, reflected in the paint
+    if(markImg.complete&&markImg.naturalWidth){
+      var mw=W*.34,mh=mw*(markImg.naturalHeight/markImg.naturalWidth),mx=W*.62,my=H*.22+Math.sin(t*.5)*H*.01;
+      ctx.save();ctx.globalAlpha=.16+.04*Math.sin(t*.9);ctx.filter='blur(1.5px)';
+      ctx.translate(mx,my);ctx.transform(1,0,-.18,1,0,0);
+      ctx.drawImage(markImg,0,0,mw,mh);
+      ctx.restore();
+    }
+    ctx.globalCompositeOperation='source-over';
+  }
+
+  // the pad
   function polish(x,y){
     var r=(matchMedia('(hover:none)').matches?54:66)*R;
     var b=hctx.createRadialGradient(x,y,r*.25,x,y,r);
@@ -804,7 +820,7 @@
   },{passive:false});
   function endTouch(){clearTimeout(holdT);polishing=false;last=null;pad.classList.remove('show','down')}
   hero.addEventListener('touchend',endTouch);hero.addEventListener('touchcancel',endTouch);
-  if(!hoverable)hint.textContent='Hold the paint, then rub';
+  if(!hoverable)hint.textContent='Press and hold the paint, then rub';
   var coach=document.getElementById('coach');
   // keep the coach mark on the paint, never on the buttons: centre it between the CTA row and the readout
   function placeCoach(){
@@ -815,8 +831,9 @@
     coach.style.top=y+'px';
   }
   placeCoach();addEventListener('resize',placeCoach);addEventListener('load',placeCoach);setTimeout(placeCoach,600);
-  function noteInteraction(){if(!interacted){interacted=true;coach.classList.add('gone');hint.textContent='Keep going'}}
+  function noteInteraction(){if(!interacted){interacted=true;coach.classList.add('gone');hint.textContent='Keep going. Every swirl you leave shows in sunlight.'}}
 
+  // how much of the panel has been corrected
   var meter=document.createElement('canvas'),mctx=meter.getContext('2d',{willReadFrequently:true});meter.width=48;meter.height=27;
   function measure(){
     if(!hz.width||!hz.height)return;
@@ -825,15 +842,16 @@
     for(var i=3;i<d.length;i+=4)sum+=d[i];
     var pct=Math.round(100-sum/(d.length/4)/255*100);
     pctNum.textContent=pct;pctBar.style.right=(100-pct)+'%';
-    if(pct>=85&&!doneShown){doneShown=true;hud.classList.add('done');hint.textContent='Corrected. Ready for coating'}
+    if(pct>=85&&!doneShown){doneShown=true;hud.classList.add('done');hint.textContent='Panel corrected. Ready for coating.'}
   }
   setInterval(measure,400);
 
   document.getElementById('resetPad').addEventListener('click',function(){paintHaze();last=null;interacted=false;doneShown=false;hud.classList.remove('done');coach.classList.remove('gone');hint.textContent=hoverable?'Move across the paint to polish':'Press and hold the paint, then rub';measure()});
 
-  document.addEventListener('visibilitychange',function(){if(!document.hidden&&hz.width!==Math.floor(hz.clientWidth*R))size()});
-  var rt;size();addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(size,150)});
-  
+  function loop(){t+=.016;frame();raf=requestAnimationFrame(loop)}
+  size();addEventListener('resize',function(){size();if(reduce)frame()});
+  if(reduce){frame()}else{loop()}
+  document.addEventListener('visibilitychange',function(){if(reduce)return;if(document.hidden)cancelAnimationFrame(raf);else loop()});
 })();
 </script>
 </body>

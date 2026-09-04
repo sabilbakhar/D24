@@ -24,5 +24,17 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/car",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/car/",
+      "destination": "/",
+      "permanent": true
+    }
   ]
 }

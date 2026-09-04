@@ -2,7 +2,7 @@
 
 Website for D24 Studio, an automobile detailing studio in Pandeshwar, Mangaluru.
 
-- `site/` — the website. `index.html` is self-contained; logos live in `site/assets/`.
+- `site/` — the website. `index.html` is the live home page (photographed car hero); `site/panel/` keeps the earlier bare-panel hero for comparison. Logos and photos live in `site/assets/`.
 - Root PNGs — original logo exports.
 
 ## Before going live
