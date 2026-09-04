@@ -121,10 +121,36 @@
   }
 
   /* ---------- hero ---------- */
-  .hero{position:relative;min-height:min(92vh,980px);display:grid;align-items:end;padding:150px 0 0;overflow:hidden;isolation:isolate}
-  .hero canvas{position:absolute;inset:0;width:100%;height:100%;z-index:-2}
-  .hero::after{content:"";position:absolute;inset:0;z-index:-1;background:
-    linear-gradient(180deg,rgba(21,16,13,.55) 0%,rgba(21,16,13,.15) 35%,rgba(21,16,13,.72) 78%,var(--ink) 100%)}
+  .hero{position:relative;min-height:min(92vh,980px);display:grid;align-items:end;padding:150px 0 0;overflow:hidden;isolation:isolate;cursor:none}
+  .hero canvas{position:absolute;inset:0;width:100%;height:100%;z-index:-2;touch-action:pan-y}
+  .hero #haze{z-index:-1}
+  .hero::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:
+    linear-gradient(180deg,rgba(21,16,13,.5) 0%,rgba(21,16,13,.08) 30%,rgba(21,16,13,.62) 74%,var(--ink) 100%)}
+  .hero .wrap{position:relative;z-index:1;pointer-events:none}
+  .hero .wrap a,.hero .wrap button{pointer-events:auto}
+  .hero a,.hero button{cursor:pointer}
+  /* the polishing pad that follows the pointer */
+  .pad{position:absolute;left:0;top:0;width:96px;height:96px;margin:-48px 0 0 -48px;z-index:2;pointer-events:none;opacity:0;transition:opacity .25s;will-change:transform}
+  .pad.show{opacity:1}
+  .pad .ring{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(240,143,94,.75);box-shadow:0 0 0 10px rgba(240,143,94,.06),inset 0 0 24px rgba(240,143,94,.12);animation:spin 1.4s linear infinite}
+  .pad .ring::before{content:"";position:absolute;inset:6px;border-radius:50%;border:1px dashed rgba(239,228,210,.35)}
+  .pad img{position:absolute;left:50%;top:50%;width:38px;transform:translate(-50%,-50%);filter:drop-shadow(0 0 6px rgba(217,49,30,.6))}
+  .pad.down .ring{border-color:var(--brand);box-shadow:0 0 0 14px rgba(217,49,30,.1),inset 0 0 30px rgba(217,49,30,.25)}
+  @media (hover:none){.hero{cursor:auto}.pad{display:none}}
+  /* live readout */
+  .hud{display:flex;flex-direction:column;align-items:flex-end;gap:10px;margin-top:22px;font-family:var(--f-display);text-transform:uppercase;letter-spacing:.22em;font-size:11px;color:var(--dust)}
+  .hud .live{display:flex;align-items:center;gap:10px}
+  .hud .live::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--brand);box-shadow:0 0 10px var(--brand);animation:blink 1.6s ease-in-out infinite}
+  @keyframes blink{50%{opacity:.25}}
+  .hud .pct{font-size:52px;line-height:1;letter-spacing:.02em;color:var(--bone);font-weight:700;font-variant-numeric:tabular-nums}
+  .hud .pct small{font-size:14px;letter-spacing:.2em;color:var(--copper);margin-left:8px;font-weight:600}
+  .hud .bar{width:190px;height:2px;background:var(--rule);position:relative;overflow:hidden}
+  .hud .bar i{position:absolute;inset:0;right:100%;background:var(--copper);transition:right .4s var(--ease)}
+  .hud .hint{color:var(--copper);letter-spacing:.2em}
+  .hud button{background:none;border:0;padding:0;color:var(--dust);font:inherit;letter-spacing:inherit;text-transform:inherit;border-bottom:1px solid var(--rule);cursor:pointer}
+  .hud button:hover{color:var(--bone);border-color:var(--copper)}
+  .hud.done .pct{color:var(--copper)}
+  @media (max-width:760px){.hud{align-items:flex-start;margin-top:26px}}
   .hero-grid{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:40px;align-items:end;padding-bottom:64px}
   .hero h1{max-width:12ch}
   .hero h1 .h-serif{display:block;font-size:.62em;color:var(--copper);margin-top:.08em;padding-left:.06em}
@@ -332,6 +358,8 @@
 <main id="top">
   <section class="hero">
     <canvas id="paint" aria-hidden="true"></canvas>
+    <canvas id="haze" aria-label="Interactive paint panel. Move across it to polish the paint." role="img"></canvas>
+    <div class="pad" id="pad" aria-hidden="true"><div class="ring"></div><img id="padImg" src="assets/mark.png" alt=""></div>
     <div class="wrap">
       <div class="hero-grid">
         <div>
@@ -340,7 +368,7 @@
             Paint has a memory.
             <span class="h-serif">We bring it back.</span>
           </h1>
-          <p class="lede rv">Correction, coating and protection done by hand, one car at a time, under lights that show every swirl we're about to remove.</p>
+          <p class="lede rv">This panel came in swirled and dull. Run the pad over it and watch the paint come back. That's the job, every day, one car at a time.</p>
           <div class="hero-cta rv">
             <a class="btn primary" href="https://wa.me/91XXXXXXXXXX?text=Hi%20D24%20Studio%2C%20I%27d%20like%20to%20book%20a%20detailing%20slot." target="_blank" rel="noopener">
               Book on WhatsApp
@@ -352,6 +380,13 @@
         <div class="hero-mark hero-stamp" aria-hidden="true">
           <img src="assets/mark-circle-mono.png" alt="">
           <svg class="txt" viewBox="0 0 200 200"><defs><path id="ring" d="M100,100 m-88,0 a88,88 0 1,1 176,0 a88,88 0 1,1 -176,0"/></defs><text><textPath href="#ring">Detailing studio · Mangaluru · est. 2024 · hand finished ·</textPath></text></svg>
+          <div class="hud" id="hud">
+            <span class="live">Paint correction · live</span>
+            <span class="pct"><span id="pctNum">0</span>%<small>corrected</small></span>
+            <span class="bar"><i id="pctBar"></i></span>
+            <span class="hint" id="hint">Move across the paint to polish</span>
+            <button type="button" id="resetPad">Bring in the next car</button>
+          </div>
         </div>
       </div>
       <div class="hero-foot">
@@ -574,20 +609,69 @@
     document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
   }
 
-  // hero: ceiling lights reflected on polished paint
-  var cv=document.getElementById('paint'),ctx=cv.getContext('2d'),W,H,t=0,raf;
+  /* ---------- hero: a swirled panel you polish back to gloss ----------
+     #paint  = the corrected finish (ceiling lights drifting over dark paint, the D24 sign reflected)
+     #haze   = the neglected finish on top (dull film + swirl marks + water spots)
+     Pointer = a polishing pad. Moving it cuts through #haze and reveals #paint.        */
+  var hero=document.querySelector('.hero'),cv=document.getElementById('paint'),ctx=cv.getContext('2d');
+  var hz=document.getElementById('haze'),hctx=hz.getContext('2d');
+  var pad=document.getElementById('pad'),markImg=document.getElementById('padImg');
+  var pctNum=document.getElementById('pctNum'),pctBar=document.getElementById('pctBar'),hud=document.getElementById('hud'),hint=document.getElementById('hint');
+  var W,H,HW,HH,R,t=0,raf,last=null,pointerDown=false,interacted=false,doneShown=false;
   var bands=[];
   for(var i=0;i<7;i++)bands.push({x:Math.random(),y:.15+Math.random()*.7,w:.12+Math.random()*.22,h:.012+Math.random()*.02,sp:(.02+Math.random()*.05)*(i%2?1:-1),ph:Math.random()*6.28,c:i%3===0?'240,143,94':'239,228,210',a:.35+Math.random()*.4});
-  function size(){var r=Math.min(devicePixelRatio||1,1.5);W=cv.width=Math.floor(cv.clientWidth*r*.5);H=cv.height=Math.floor(cv.clientHeight*r*.5)}
+
+  function size(){
+    var r=Math.min(devicePixelRatio||1,1.5);R=r;
+    W=cv.width=Math.floor(cv.clientWidth*r*.5);H=cv.height=Math.floor(cv.clientHeight*r*.5);
+    HW=hz.width=Math.floor(hz.clientWidth*r);HH=hz.height=Math.floor(hz.clientHeight*r);
+    paintHaze();
+  }
+
+  // the neglected finish
+  function paintHaze(){
+    hctx.globalCompositeOperation='source-over';
+    hctx.clearRect(0,0,HW,HH);
+    var g=hctx.createLinearGradient(0,0,0,HH);
+    g.addColorStop(0,'rgba(74,66,60,.97)');g.addColorStop(.5,'rgba(92,82,74,.97)');g.addColorStop(1,'rgba(58,50,45,.98)');
+    hctx.fillStyle=g;hctx.fillRect(0,0,HW,HH);
+    // oxidised bloom
+    var bl=hctx.createRadialGradient(HW*.6,HH*.35,0,HW*.6,HH*.35,HW*.6);
+    bl.addColorStop(0,'rgba(150,140,128,.28)');bl.addColorStop(1,'rgba(150,140,128,0)');
+    hctx.fillStyle=bl;hctx.fillRect(0,0,HW,HH);
+    // swirl marks: thousands of short arcs from automatic brushes
+    var n=Math.floor(HW*HH/900);
+    hctx.lineCap='round';
+    for(var i=0;i<n;i++){
+      var x=Math.random()*HW,y=Math.random()*HH,rad=8*R+Math.random()*220*R,st=Math.random()*6.28,len=.15+Math.random()*.7;
+      var bright=Math.random()<.06;
+      hctx.strokeStyle=bright?'rgba(235,225,210,'+(.28+Math.random()*.3)+')':'rgba(225,215,200,'+(.05+Math.random()*.11)+')';
+      hctx.lineWidth=(bright?1.1:.7)*R;
+      hctx.beginPath();hctx.arc(x,y,rad,st,st+len);hctx.stroke();
+    }
+    // straight scratches
+    for(var j=0;j<Math.floor(HW/60);j++){
+      var sx=Math.random()*HW,sy=Math.random()*HH,ang=(Math.random()-.5)*.9,l=40*R+Math.random()*260*R;
+      hctx.strokeStyle='rgba(240,232,220,'+(.15+Math.random()*.3)+')';hctx.lineWidth=(.6+Math.random()*.8)*R;
+      hctx.beginPath();hctx.moveTo(sx,sy);hctx.lineTo(sx+Math.cos(ang)*l,sy+Math.sin(ang)*l);hctx.stroke();
+    }
+    // water spots
+    for(var k=0;k<Math.floor(HW*HH/26000);k++){
+      var wx=Math.random()*HW,wy=Math.random()*HH,wr=(3+Math.random()*9)*R;
+      hctx.strokeStyle='rgba(230,222,208,'+(.12+Math.random()*.2)+')';hctx.lineWidth=.8*R;
+      hctx.beginPath();hctx.arc(wx,wy,wr,0,6.28);hctx.stroke();
+    }
+    hctx.globalCompositeOperation='destination-out';
+  }
+
+  // the corrected finish
   function frame(){
     ctx.clearRect(0,0,W,H);
-    // curved body: dark warm base with a soft crown highlight
     var g=ctx.createLinearGradient(0,0,0,H);
     g.addColorStop(0,'#1b1512');g.addColorStop(.45,'#2a201b');g.addColorStop(.62,'#1a1411');g.addColorStop(1,'#15100d');
     ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
-    // brand glow low left, like a red shop sign catching the flank
     var rg=ctx.createRadialGradient(W*.18,H*.9,0,W*.18,H*.9,W*.55);
-    rg.addColorStop(0,'rgba(217,49,30,.28)');rg.addColorStop(1,'rgba(217,49,30,0)');
+    rg.addColorStop(0,'rgba(217,49,30,.3)');rg.addColorStop(1,'rgba(217,49,30,0)');
     ctx.fillStyle=rg;ctx.fillRect(0,0,W,H);
     ctx.globalCompositeOperation='lighter';
     bands.forEach(function(b){
@@ -601,11 +685,71 @@
       ctx.fillRect(-bw,-bh/2,bw*2,bh);
       ctx.restore();
     });
+    // the studio sign, reflected in the paint
+    if(markImg.complete&&markImg.naturalWidth){
+      var mw=W*.34,mh=mw*(markImg.naturalHeight/markImg.naturalWidth),mx=W*.62,my=H*.22+Math.sin(t*.5)*H*.01;
+      ctx.save();ctx.globalAlpha=.16+.04*Math.sin(t*.9);ctx.filter='blur(1.5px)';
+      ctx.translate(mx,my);ctx.transform(1,0,-.18,1,0,0);
+      ctx.drawImage(markImg,0,0,mw,mh);
+      ctx.restore();
+    }
     ctx.globalCompositeOperation='source-over';
   }
+
+  // the pad
+  var padScale=1;
+  function polish(x,y){
+    var r=(matchMedia('(hover:none)').matches?54:66)*R*padScale;
+    var b=hctx.createRadialGradient(x,y,r*.25,x,y,r);
+    b.addColorStop(0,'rgba(0,0,0,.95)');b.addColorStop(.7,'rgba(0,0,0,.5)');b.addColorStop(1,'rgba(0,0,0,0)');
+    hctx.fillStyle=b;hctx.beginPath();hctx.arc(x,y,r,0,6.28);hctx.fill();
+  }
+  function stroke(x,y){
+    if(last){var dx=x-last.x,dy=y-last.y,d=Math.hypot(dx,dy),steps=Math.ceil(d/(6*R));for(var i=1;i<=steps;i++)polish(last.x+dx*i/steps,last.y+dy*i/steps)}
+    else polish(x,y);
+    last={x:x,y:y};
+  }
+  function toCanvas(e){var b=hz.getBoundingClientRect();return {x:(e.clientX-b.left)*R,y:(e.clientY-b.top)*R,cx:e.clientX-b.left,cy:e.clientY-b.top}}
+  var hoverable=!matchMedia('(hover:none)').matches;
+  hero.addEventListener('pointermove',function(e){
+    var p=toCanvas(e);
+    if(hoverable){pad.style.transform='translate('+p.cx+'px,'+p.cy+'px)';pad.classList.add('show')}
+    if(hoverable||pointerDown){stroke(p.x,p.y);noteInteraction()}
+  });
+  hero.addEventListener('pointerdown',function(e){pointerDown=true;pad.classList.add('down');last=null;var p=toCanvas(e);stroke(p.x,p.y);noteInteraction()});
+  addEventListener('pointerup',function(){pointerDown=false;pad.classList.remove('down');last=null});
+  hero.addEventListener('pointerleave',function(){pad.classList.remove('show');last=null});
+  hero.addEventListener('pointercancel',function(){pointerDown=false;last=null});
+  function noteInteraction(){if(!interacted){interacted=true;hint.textContent='Keep going. Every swirl you leave shows in sunlight.'}}
+
+  // how much of the panel has been corrected
+  var meter=document.createElement('canvas'),mctx=meter.getContext('2d',{willReadFrequently:true});meter.width=48;meter.height=27;
+  function measure(){
+    if(!hz.width||!hz.height)return;
+    mctx.clearRect(0,0,48,27);mctx.drawImage(hz,0,0,48,27);
+    var d=mctx.getImageData(0,0,48,27).data,sum=0;
+    for(var i=3;i<d.length;i+=4)sum+=d[i];
+    var pct=Math.round(100-sum/(d.length/4)/255*100);
+    pctNum.textContent=pct;pctBar.style.right=(100-pct)+'%';
+    if(pct>=85&&!doneShown){doneShown=true;hud.classList.add('done');hint.textContent='Panel corrected. Ready for coating.'}
+  }
+  setInterval(measure,400);
+
+  // first pass: the studio's own pad runs one sweep so the panel is never just dull
+  function demoSweep(){
+    var pts=[[.04,.3],[.2,.24],[.38,.34],[.56,.26],[.74,.38],[.92,.3],[.96,.48],[.8,.56],[.62,.46],[.44,.58],[.26,.5],[.08,.6]],start=null,dur=3800;
+    function at(u){var seg=u*(pts.length-1),i=Math.min(Math.floor(seg),pts.length-2),f=seg-i;return {x:(pts[i][0]+(pts[i+1][0]-pts[i][0])*f)*HW,y:(pts[i][1]+(pts[i+1][1]-pts[i][1])*f)*HH}}
+    padScale=1.7;
+    if(reduce){for(var u=0;u<=1;u+=.005){var p=at(u);stroke(p.x,p.y)}last=null;padScale=1;measure();return}
+    function step(ts){if(interacted){padScale=1;return}start=start||ts;var u=Math.min((ts-start)/dur,1),e=u<.5?2*u*u:-1+(4-2*u)*u;var p=at(e);stroke(p.x,p.y);if(u<1)requestAnimationFrame(step);else{last=null;padScale=1}}
+    setTimeout(function(){if(!interacted)requestAnimationFrame(step)},900);
+  }
+  document.getElementById('resetPad').addEventListener('click',function(){paintHaze();last=null;interacted=false;doneShown=false;hud.classList.remove('done');hint.textContent='Move across the paint to polish';measure();demoSweep()});
+
   function loop(){t+=.016;frame();raf=requestAnimationFrame(loop)}
   size();addEventListener('resize',function(){size();if(reduce)frame()});
   if(reduce){frame()}else{loop()}
+  demoSweep();
   document.addEventListener('visibilitychange',function(){if(reduce)return;if(document.hidden)cancelAnimationFrame(raf);else loop()});
 })();
 </script>
