@@ -188,7 +188,7 @@
   .coach,.touch-only{display:none}
   @media (hover:none){
     .mouse-only{display:none}.touch-only{display:inline}
-    .coach{display:flex;flex-direction:column;align-items:center;gap:12px;position:absolute;left:50%;top:50%;z-index:3;pointer-events:none;transform:translate(-50%,-50%);transition:opacity .35s}
+    .coach{display:flex;flex-direction:column;align-items:center;gap:12px;position:absolute;left:50%;top:74%;z-index:3;pointer-events:none;transform:translate(-50%,-50%);transition:opacity .35s}
     .coach.gone{opacity:0}
     .coach .cring{width:78px;height:78px;border-radius:50%;border:2px solid var(--copper);display:grid;place-items:center;background:rgba(21,16,13,.35);animation:coachRub 2.2s ease-in-out infinite,coachPulse 1.5s ease-out infinite}
     .coach svg{width:36px;height:36px;color:var(--bone);filter:drop-shadow(0 1px 6px rgba(21,16,13,.9))}
@@ -816,6 +816,15 @@
   hero.addEventListener('touchend',endTouch);hero.addEventListener('touchcancel',endTouch);
   if(!hoverable)hint.textContent='Press and hold the paint, then rub';
   var coach=document.getElementById('coach');
+  // keep the coach mark on the paint, never on the buttons: centre it between the CTA row and the readout
+  function placeCoach(){
+    if(hoverable)return;
+    var hb=hero.getBoundingClientRect(),cta=document.querySelector('.hero-cta').getBoundingClientRect(),hb2=hud.getBoundingClientRect();
+    var top=cta.bottom-hb.top+70,bottom=hb2.top-hb.top-40;
+    var y=bottom>top+90?(top+bottom)/2:top+60;
+    coach.style.top=y+'px';
+  }
+  placeCoach();addEventListener('resize',placeCoach);addEventListener('load',placeCoach);setTimeout(placeCoach,600);
   function noteInteraction(){if(!interacted){interacted=true;coach.classList.add('gone');hint.textContent='Keep going. Every swirl you leave shows in sunlight.'}}
 
   // how much of the panel has been corrected
