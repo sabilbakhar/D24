@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /car/
+
+Sitemap: https://d24-studio.vercel.app/sitemap.xml
