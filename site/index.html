@@ -452,7 +452,7 @@
             <svg class="txt" viewBox="0 0 200 200"><defs><path id="ring" d="M100,100 m-88,0 a88,88 0 1,1 176,0 a88,88 0 1,1 -176,0"/></defs><text><textPath href="#ring">Detailing studio · Mangaluru · est. 2024 · hand finished ·</textPath></text></svg>
           </div>
           <div class="hud" id="hud">
-            <span class="live">Live</span>
+            <span class="live"><span id="carLabel">Car 1 of 3 · Black sedan</span></span>
             <span class="pct"><span id="pctNum">0</span>%<small>corrected</small></span>
             <span class="bar"><i id="pctBar"></i></span>
             <span class="hint" id="hint">Move across the paint to polish</span>
@@ -703,9 +703,13 @@
   var pad=document.getElementById('pad'),markImg=document.getElementById('padImg');
   var pctNum=document.getElementById('pctNum'),pctBar=document.getElementById('pctBar'),hud=document.getElementById('hud'),hint=document.getElementById('hint');
   var W,H,R,last=null,pointerDown=false,interacted=false,doneShown=false,photo=null,portrait=false;
-  var wide=new Image(),tall=new Image();wide.src="assets/car-wide.jpg";tall.src="assets/car-tall.jpg";
-
-  function pick(){portrait=hz.clientHeight>hz.clientWidth*1.05;return portrait?tall:wide}
+  // three cars in the bay; "Next car" cycles through them. Only the first loads up front.
+  var cars=[{w:"assets/car-wide.jpg",t:"assets/car-tall.jpg",name:"Black sedan"},{w:"assets/car2-wide.jpg",t:"assets/car2-tall.jpg",name:"Pearl white SUV"},{w:"assets/car3-wide.jpg",t:"assets/car3-tall.jpg",name:"Midnight blue coupe"}],cur=0;
+  var carLabel=document.getElementById('carLabel');
+  function img(src){var c=img.cache||(img.cache={});if(!c[src]){c[src]=new Image();c[src].src=src}return c[src]}
+  function pick(){portrait=hz.clientHeight>hz.clientWidth*1.05;return img(portrait?cars[cur].t:cars[cur].w)}
+  function preloadNext(){var n=cars[(cur+1)%cars.length];img(portrait?n.t:n.w)}
+  function showCarLabel(){if(carLabel)carLabel.textContent='Car '+(cur+1)+' of '+cars.length+' · '+cars[cur].name}
   // object-fit: cover, anchored where the car is
   function cover(c,img,w,h){
     var s=Math.max(w/img.naturalWidth,h/img.naturalHeight),dw=img.naturalWidth*s,dh=img.naturalHeight*s;
@@ -722,13 +726,14 @@
     lastW=cw;lastH=ch;
     R=Math.min(devicePixelRatio||1,1.5);
     W=cv.width=hz.width=Math.floor(cw*R);H=cv.height=hz.height=Math.floor(ch*R);
-    photo=pick();
+    photo=pick();showCarLabel();
     if(photo.complete&&photo.naturalWidth)paintAll();else photo.onload=function(){if(pick()===photo)paintAll()};
   }
   function paintAll(){
     ctx.clearRect(0,0,W,H);ctx.filter='none';cover(ctx,photo,W,H);
     paintHaze();
     if(keep){hctx.globalCompositeOperation='destination-in';hctx.drawImage(keep,0,0,W,H);hctx.globalCompositeOperation='destination-out';keep=null}
+    preloadNext();
   }
   // the neglected finish: the same car, drained of gloss, then scratched
   function paintHaze(){
@@ -829,7 +834,10 @@
   }
   setInterval(measure,400);
 
-  document.getElementById('resetPad').addEventListener('click',function(){paintHaze();last=null;interacted=false;doneShown=false;hud.classList.remove('done');coach.classList.remove('gone');hint.textContent=hoverable?'Move across the paint to polish':'Press and hold the paint, then rub';measure()});
+  document.getElementById('resetPad').addEventListener('click',function(){
+    cur=(cur+1)%cars.length;keep=null;photo=pick();showCarLabel();
+    if(photo.complete&&photo.naturalWidth)paintAll();else{hint.textContent='Rolling the next car in';photo.onload=function(){if(pick()===photo){paintAll()}}}
+    last=null;interacted=false;doneShown=false;hud.classList.remove('done');coach.classList.remove('gone');hint.textContent=hoverable?'Move across the paint to polish':'Press and hold the paint, then rub';measure()});
 
   document.addEventListener('visibilitychange',function(){if(!document.hidden&&hz.width!==Math.floor(hz.clientWidth*R))size()});
   var rt;size();addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(size,150)});
