@@ -162,6 +162,20 @@
   .pad img{position:absolute;left:50%;top:50%;width:38px;transform:translate(-50%,-50%);filter:drop-shadow(0 0 6px rgba(217,49,30,.6))}
   .pad.down .ring{border-color:var(--brand);box-shadow:0 0 0 14px rgba(217,49,30,.1),inset 0 0 30px rgba(217,49,30,.25)}
   @media (hover:none){.hero{cursor:auto}.pad{display:none}.pad.down{display:block}}
+
+  /* phones: show the gesture before anything else */
+  .coach,.touch-only{display:none}
+  @media (hover:none){
+    .mouse-only{display:none}.touch-only{display:inline}
+    .coach{display:flex;flex-direction:column;align-items:center;gap:12px;position:absolute;left:50%;top:60%;z-index:3;pointer-events:none;transform:translate(-50%,-50%);transition:opacity .35s}
+    .coach.gone{opacity:0}
+    .coach .cring{width:78px;height:78px;border-radius:50%;border:2px solid var(--copper);display:grid;place-items:center;background:rgba(21,16,13,.35);animation:coachRub 2.2s ease-in-out infinite,coachPulse 1.5s ease-out infinite}
+    .coach svg{width:36px;height:36px;color:var(--bone);filter:drop-shadow(0 1px 6px rgba(21,16,13,.9))}
+    .coach b{font-family:var(--f-display);font-weight:600;text-transform:uppercase;letter-spacing:.2em;font-size:12px;line-height:1.5;color:var(--bone);text-align:center;background:rgba(21,16,13,.78);padding:9px 14px;border:1px solid rgba(240,143,94,.5);white-space:nowrap}
+    .coach b em{font-style:normal;color:var(--copper)}
+  }
+  @keyframes coachRub{0%,100%{transform:translateX(-36px)}50%{transform:translateX(36px)}}
+  @keyframes coachPulse{0%{box-shadow:0 0 0 0 rgba(240,143,94,.6)}100%{box-shadow:0 0 0 24px rgba(240,143,94,0)}}
   @keyframes spin{to{transform:rotate(360deg)}}
 
   .hero-grid{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:40px;align-items:end;padding-bottom:64px}
@@ -411,6 +425,10 @@
     <canvas id="paint" aria-hidden="true"></canvas>
     <canvas id="haze" aria-label="A dark sedan in the studio, paint dull and swirled. Move across it to polish it." role="img"></canvas>
     <div class="pad" id="pad" aria-hidden="true"><div class="ring"></div><img id="padImg" src="../assets/mark.png" alt=""></div>
+    <div class="coach" id="coach" aria-hidden="true">
+      <span class="cring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11.5V5.5a1.5 1.5 0 0 1 3 0v5"/><path d="M12 10.5V9a1.5 1.5 0 0 1 3 0v2.5"/><path d="M15 11a1.5 1.5 0 0 1 3 0v1.5"/><path d="M18 12.5a1.5 1.5 0 0 1 3 0V16a6 6 0 0 1-6 6h-2.2a6 6 0 0 1-4.9-2.5l-3.3-4.6a1.6 1.6 0 0 1 2.5-2L9 15"/></svg></span>
+      <b><em>Hold</em> the paint<br>&amp; rub to polish</b>
+    </div>
     <div class="wrap">
       <div class="hero-grid">
         <div>
@@ -419,7 +437,7 @@
             Paint has a memory.
             <span class="h-serif">We bring it back.</span>
           </h1>
-          <p class="lede rv">Run the pad over the paint.</p>
+          <p class="lede rv"><span class="mouse-only">Run the pad over the paint.</span><span class="touch-only">Hold the paint and rub it clean.</span></p>
           <div class="hero-cta rv">
             <a class="btn primary" href="https://wa.me/91XXXXXXXXXX?text=Hi%20D24%20Studio%2C%20I%27d%20like%20to%20book%20a%20detailing%20slot." target="_blank" rel="noopener">
               Book on WhatsApp
@@ -781,7 +799,8 @@
   function endTouch(){clearTimeout(holdT);polishing=false;last=null;pad.classList.remove('show','down')}
   hero.addEventListener('touchend',endTouch);hero.addEventListener('touchcancel',endTouch);
   if(!hoverable)hint.textContent='Hold the paint, then rub';
-  function noteInteraction(){if(!interacted){interacted=true;hint.textContent='Keep going'}}
+  var coach=document.getElementById('coach');
+  function noteInteraction(){if(!interacted){interacted=true;coach.classList.add('gone');hint.textContent='Keep going'}}
 
   var meter=document.createElement('canvas'),mctx=meter.getContext('2d',{willReadFrequently:true});meter.width=48;meter.height=27;
   function measure(){
@@ -807,7 +826,7 @@
     function step(ts){if(interacted){padScale=1;return}start=start||ts;var u=Math.min((ts-start)/dur,1),e=u<.5?2*u*u:-1+(4-2*u)*u;var p=at(e);stroke(p.x,p.y);if(u<1)requestAnimationFrame(step);else{last=null;padScale=1}}
     setTimeout(function(){if(!interacted)requestAnimationFrame(step)},900);
   }
-  document.getElementById('resetPad').addEventListener('click',function(){paintHaze();last=null;interacted=false;doneShown=false;hud.classList.remove('done');hint.textContent=hoverable?'Move across the paint to polish':'Press and hold the paint, then rub';measure();demoSweep()});
+  document.getElementById('resetPad').addEventListener('click',function(){paintHaze();last=null;interacted=false;doneShown=false;hud.classList.remove('done');coach.classList.remove('gone');hint.textContent=hoverable?'Move across the paint to polish':'Press and hold the paint, then rub';measure();demoSweep()});
 
   document.addEventListener('visibilitychange',function(){if(!document.hidden&&hz.width!==Math.floor(hz.clientWidth*R))size()});
   var rt;size();addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(size,150)});
