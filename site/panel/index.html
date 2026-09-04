@@ -184,19 +184,28 @@
   .hero-stamp .txt{position:absolute;left:0;top:0;width:100%;aspect-ratio:1;animation:spin 40s linear infinite reverse}
   .hero-stamp .txt text{font-family:var(--f-display);font-size:11.5px;letter-spacing:.32em;fill:var(--dust);text-transform:uppercase}
 
-  /* phones: show the gesture before anything else */
+  /* phones: act out the gesture in order. land, hold while the ring fills, rub, lift */
   .coach,.touch-only{display:none}
   @media (hover:none){
     .mouse-only{display:none}.touch-only{display:inline}
-    .coach{display:flex;flex-direction:column;align-items:center;gap:12px;position:absolute;left:50%;top:74%;z-index:3;pointer-events:none;transform:translate(-50%,-50%);transition:opacity .35s}
+    .coach{display:flex;flex-direction:column;align-items:center;gap:14px;position:absolute;left:50%;top:74%;z-index:3;pointer-events:none;transform:translate(-50%,-50%);transition:opacity .35s}
     .coach.gone{opacity:0}
-    .coach .cring{width:78px;height:78px;border-radius:50%;border:2px solid var(--copper);display:grid;place-items:center;background:rgba(21,16,13,.35);animation:coachRub 2.2s ease-in-out infinite,coachPulse 1.5s ease-out infinite}
-    .coach svg{width:36px;height:36px;color:var(--bone);filter:drop-shadow(0 1px 6px rgba(21,16,13,.9))}
-    .coach b{font-family:var(--f-display);font-weight:600;text-transform:uppercase;letter-spacing:.2em;font-size:12px;line-height:1.5;color:var(--bone);text-align:center;background:rgba(21,16,13,.78);padding:9px 14px;border:1px solid rgba(240,143,94,.5);white-space:nowrap}
-    .coach b em{font-style:normal;color:var(--copper)}
+    .coach .cring{position:relative;width:84px;height:84px;border-radius:50%;border:1.5px solid rgba(240,143,94,.45);display:grid;place-items:center;background:rgba(21,16,13,.4);animation:coachMove 4.6s ease-in-out infinite,coachPulse 4.6s ease-out infinite}
+    .coach .arc{position:absolute;inset:-1.5px;width:calc(100% + 3px);height:calc(100% + 3px);transform:rotate(-90deg)}
+    .coach .arc circle{fill:none;stroke:var(--copper);stroke-width:4;stroke-linecap:round;stroke-dasharray:289;stroke-dashoffset:289;animation:coachArc 4.6s linear infinite}
+    .coach .hand{width:36px;height:36px;color:var(--bone);filter:drop-shadow(0 1px 6px rgba(21,16,13,.9));animation:coachPress 4.6s ease-in-out infinite}
+    .coach b{display:flex;gap:14px;font-family:var(--f-display);font-weight:600;text-transform:uppercase;letter-spacing:.2em;font-size:12px;line-height:1;color:var(--dust);background:rgba(21,16,13,.8);padding:10px 14px;border:1px solid rgba(240,143,94,.5);white-space:nowrap}
+    .coach b span{display:flex;align-items:center;gap:7px;animation:coachStep 4.6s steps(1) infinite}
+    .coach b span:last-child{animation-name:coachStep2}
+    .coach b em{font-style:normal;font-size:10px;width:16px;height:16px;border:1px solid currentColor;border-radius:50%;display:grid;place-items:center;letter-spacing:0}
   }
-  @keyframes coachRub{0%,100%{transform:translateX(-36px)}50%{transform:translateX(36px)}}
-  @keyframes coachPulse{0%{box-shadow:0 0 0 0 rgba(240,143,94,.6)}100%{box-shadow:0 0 0 24px rgba(240,143,94,0)}}
+  /* one 4.6s timeline: 0-8% land, 8-38% hold, 38-84% rub, 84-100% lift */
+  @keyframes coachMove{0%{transform:translateX(0) scale(1.12);opacity:0}8%{transform:translateX(0) scale(1);opacity:1}38%{transform:translateX(0) scale(1)}50%{transform:translateX(40px)}62%{transform:translateX(-40px)}74%{transform:translateX(40px)}84%{transform:translateX(0) scale(1);opacity:1}92%,100%{transform:translateX(0) scale(1.12);opacity:0}}
+  @keyframes coachArc{0%,8%{stroke-dashoffset:289}38%,84%{stroke-dashoffset:0}90%,100%{stroke-dashoffset:289}}
+  @keyframes coachPress{0%,8%{transform:scale(1)}12%,84%{transform:scale(.86)}90%,100%{transform:scale(1)}}
+  @keyframes coachPulse{0%,8%{box-shadow:0 0 0 0 rgba(240,143,94,0)}10%{box-shadow:0 0 0 0 rgba(240,143,94,.55)}24%{box-shadow:0 0 0 22px rgba(240,143,94,0)}25%{box-shadow:0 0 0 0 rgba(240,143,94,.55)}38%{box-shadow:0 0 0 22px rgba(240,143,94,0)}100%{box-shadow:0 0 0 0 rgba(240,143,94,0)}}
+  @keyframes coachStep{0%,8%{color:var(--dust)}8.1%,38%{color:var(--copper)}38.1%,100%{color:var(--dust)}}
+  @keyframes coachStep2{0%,38%{color:var(--dust)}38.1%,84%{color:var(--copper)}84.1%,100%{color:var(--dust)}}
   @keyframes spin{to{transform:rotate(360deg)}}
 
   .hero-foot{border-top:1px solid var(--rule);display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:22px 0 26px;font-size:13px;color:var(--dust)}
@@ -411,8 +420,11 @@
     <canvas id="haze" aria-label="Interactive paint panel. Move across it to polish the paint." role="img"></canvas>
     <div class="pad" id="pad" aria-hidden="true"><div class="ring"></div><img id="padImg" src="../assets/mark.png" alt=""></div>
     <div class="coach" id="coach" aria-hidden="true">
-      <span class="cring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11.5V5.5a1.5 1.5 0 0 1 3 0v5"/><path d="M12 10.5V9a1.5 1.5 0 0 1 3 0v2.5"/><path d="M15 11a1.5 1.5 0 0 1 3 0v1.5"/><path d="M18 12.5a1.5 1.5 0 0 1 3 0V16a6 6 0 0 1-6 6h-2.2a6 6 0 0 1-4.9-2.5l-3.3-4.6a1.6 1.6 0 0 1 2.5-2L9 15"/></svg></span>
-      <b><em>Hold</em> the paint<br>&amp; rub to polish</b>
+      <span class="cring">
+        <svg class="arc" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46"/></svg>
+        <svg class="hand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11.5V5.5a1.5 1.5 0 0 1 3 0v5"/><path d="M12 10.5V9a1.5 1.5 0 0 1 3 0v2.5"/><path d="M15 11a1.5 1.5 0 0 1 3 0v1.5"/><path d="M18 12.5a1.5 1.5 0 0 1 3 0V16a6 6 0 0 1-6 6h-2.2a6 6 0 0 1-4.9-2.5l-3.3-4.6a1.6 1.6 0 0 1 2.5-2L9 15"/></svg>
+      </span>
+      <b><span><em>1</em>Hold</span><span><em>2</em>Rub</span></b>
     </div>
     <div class="wrap">
       <div class="hero-grid">
