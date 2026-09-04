@@ -149,8 +149,9 @@
   .hero canvas{position:absolute;inset:0;width:100%;height:100%;z-index:-2}
   .hero #haze{z-index:-1}
   .hero::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:
-    linear-gradient(180deg,rgba(21,16,13,.55) 0%,rgba(21,16,13,0) 28%,rgba(21,16,13,0) 60%,rgba(21,16,13,.7) 86%,var(--ink) 100%),
-    linear-gradient(90deg,rgba(21,16,13,.55) 0%,rgba(21,16,13,0) 45%)}
+    linear-gradient(180deg,rgba(21,16,13,.6) 0%,rgba(21,16,13,0) 26%,rgba(21,16,13,0) 62%,rgba(21,16,13,.78) 88%,var(--ink) 100%),
+    linear-gradient(90deg,rgba(21,16,13,.92) 0%,rgba(21,16,13,.72) 26%,rgba(21,16,13,.3) 48%,rgba(21,16,13,0) 64%),
+    radial-gradient(60% 50% at 100% 100%,rgba(21,16,13,.7),transparent 70%)}
   .hero .wrap{position:relative;z-index:1;pointer-events:none}
   .hero .wrap a,.hero .wrap button{pointer-events:auto}
   .hero a,.hero button{cursor:pointer}
@@ -163,13 +164,18 @@
   @media (hover:none){.hero{cursor:auto}.pad{display:none}.pad.down{display:block}}
   @keyframes spin{to{transform:rotate(360deg)}}
 
-  .hero-grid{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:40px;align-items:end;padding-bottom:56px}
-  .hero h1{max-width:12ch;text-shadow:0 2px 30px rgba(21,16,13,.6)}
+  .hero-grid{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:40px;align-items:end;padding-bottom:64px}
+  .hero h1{max-width:12ch;text-shadow:0 2px 30px rgba(21,16,13,.8)}
   .hero h1 .h-serif{display:block;font-size:.62em;color:var(--copper);margin-top:.08em;padding-left:.06em}
-  .hero .lede{max-width:40ch;margin-top:28px;color:#cbb8a3;text-shadow:0 1px 20px rgba(21,16,13,.8)}
-  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:36px}
+  .hero .lede{max-width:30ch;margin-top:24px;color:#d6c4ae;text-shadow:0 1px 20px rgba(21,16,13,.9)}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:32px}
+  .hero-side{display:flex;flex-direction:column;align-items:flex-end;gap:26px}
+  .hero-mark{width:clamp(120px,14vw,190px);opacity:.9;position:relative}
+  .hero-mark > img{animation:spin 60s linear infinite;filter:drop-shadow(0 0 18px rgba(21,16,13,.9))}
+  .hero-stamp .txt{position:absolute;left:0;top:0;width:100%;aspect-ratio:1;animation:spin 40s linear infinite reverse}
+  .hero-stamp .txt text{font-family:var(--f-display);font-size:11.5px;letter-spacing:.32em;fill:var(--dust);text-transform:uppercase}
 
-  .hud{display:flex;flex-direction:column;align-items:flex-end;gap:10px;font-family:var(--f-display);text-transform:uppercase;letter-spacing:.22em;font-size:11px;color:var(--dust);text-shadow:0 1px 14px rgba(21,16,13,.9)}
+  .hud{display:flex;flex-direction:column;align-items:flex-end;gap:8px;font-family:var(--f-display);text-transform:uppercase;letter-spacing:.22em;font-size:11px;color:var(--dust);text-shadow:0 1px 14px rgba(21,16,13,.9)}
   .hud .live{display:flex;align-items:center;gap:10px}
   .hud .live::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--brand);box-shadow:0 0 10px var(--brand);animation:blink 1.6s ease-in-out infinite}
   @keyframes blink{50%{opacity:.25}}
@@ -182,13 +188,11 @@
   .hud button:hover{color:var(--bone);border-color:var(--copper)}
   .hud.done .pct{color:var(--copper)}
 
-  .hero-foot{border-top:1px solid var(--rule);display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:22px 0 26px;font-size:13px;color:var(--dust)}
-  .hero-foot b{display:block;font-family:var(--f-display);font-weight:600;letter-spacing:.22em;text-transform:uppercase;font-size:11px;color:var(--copper);margin-bottom:6px}
 
   /* phones: headline sits in the dark space above the car, readout becomes one compact row */
   @media (max-width:760px){
     .hero{padding-top:104px;min-height:100svh;align-items:start}
-    .hero::after{background:linear-gradient(180deg,rgba(21,16,13,.7) 0%,rgba(21,16,13,.25) 30%,rgba(21,16,13,0) 45%,rgba(21,16,13,0) 80%,var(--ink) 100%)}
+    .hero::after{background:linear-gradient(180deg,rgba(21,16,13,.92) 0%,rgba(21,16,13,.78) 30%,rgba(21,16,13,.25) 46%,rgba(21,16,13,0) 58%,rgba(21,16,13,0) 76%,rgba(21,16,13,.85) 92%,var(--ink) 100%)}
     .hero-grid{grid-template-columns:1fr;gap:0;padding-bottom:0;min-height:calc(100svh - 104px);grid-template-rows:auto 1fr auto}
     .hero h1{font-size:clamp(40px,12.5vw,58px)}
     .hero .lede{font-size:18px;margin-top:18px;max-width:30ch}
@@ -200,7 +204,9 @@
     .hud .bar{order:3;flex:1 1 90px;width:auto}
     .hud .hint{order:4;flex:1 1 100%;font-size:10px}
     .hud button{order:5}
-    .hero-foot{display:none}
+    .hero-side{display:contents}
+    .hero-mark{position:absolute;right:var(--gutter);top:92px;width:74px;opacity:.85}
+    .hero-stamp .txt{display:none}
   }
 
   /* ---------- marquee ---------- */
@@ -413,7 +419,7 @@
             Paint has a memory.
             <span class="h-serif">We bring it back.</span>
           </h1>
-          <p class="lede rv">This one came in dull and swirled. Run the pad over the paint and watch it come back.</p>
+          <p class="lede rv">Run the pad over the paint.</p>
           <div class="hero-cta rv">
             <a class="btn primary" href="https://wa.me/91XXXXXXXXXX?text=Hi%20D24%20Studio%2C%20I%27d%20like%20to%20book%20a%20detailing%20slot." target="_blank" rel="noopener">
               Book on WhatsApp
@@ -422,18 +428,19 @@
             <a class="btn ghost" href="#services">See the menu</a>
           </div>
         </div>
-        <div class="hud" id="hud">
-          <span class="live">Paint correction · live</span>
-          <span class="pct"><span id="pctNum">0</span>%<small>corrected</small></span>
-          <span class="bar"><i id="pctBar"></i></span>
-          <span class="hint" id="hint">Move across the paint to polish</span>
-          <button type="button" id="resetPad">Bring in the next car</button>
+        <div class="hero-side">
+          <div class="hero-mark hero-stamp" aria-hidden="true">
+            <img src="../assets/mark-circle-mono.png" alt="">
+            <svg class="txt" viewBox="0 0 200 200"><defs><path id="ring" d="M100,100 m-88,0 a88,88 0 1,1 176,0 a88,88 0 1,1 -176,0"/></defs><text><textPath href="#ring">Detailing studio · Mangaluru · est. 2024 · hand finished ·</textPath></text></svg>
+          </div>
+          <div class="hud" id="hud">
+            <span class="live">Live</span>
+            <span class="pct"><span id="pctNum">0</span>%<small>corrected</small></span>
+            <span class="bar"><i id="pctBar"></i></span>
+            <span class="hint" id="hint">Move across the paint to polish</span>
+            <button type="button" id="resetPad">Next car</button>
+          </div>
         </div>
-      </div>
-      <div class="hero-foot">
-        <div><b>Find us</b>Opposite Bharath Chicken, Amrithnagar, Pandeshwar 575001</div>
-        <div><b>Studio hours</b>Mon to Sat, 9:30 to 19:00 · Sunday by appointment</div>
-        <div><b>By appointment</b>One bay, one car. We never rush a finish to fit a queue.</div>
       </div>
     </div>
   </section>
@@ -773,8 +780,8 @@
   },{passive:false});
   function endTouch(){clearTimeout(holdT);polishing=false;last=null;pad.classList.remove('show','down')}
   hero.addEventListener('touchend',endTouch);hero.addEventListener('touchcancel',endTouch);
-  if(!hoverable)hint.textContent='Press and hold the paint, then rub';
-  function noteInteraction(){if(!interacted){interacted=true;hint.textContent='Keep going. Every swirl you leave shows in sunlight.'}}
+  if(!hoverable)hint.textContent='Hold the paint, then rub';
+  function noteInteraction(){if(!interacted){interacted=true;hint.textContent='Keep going'}}
 
   var meter=document.createElement('canvas'),mctx=meter.getContext('2d',{willReadFrequently:true});meter.width=48;meter.height=27;
   function measure(){
@@ -784,7 +791,7 @@
     for(var i=3;i<d.length;i+=4)sum+=d[i];
     var pct=Math.round(100-sum/(d.length/4)/255*100);
     pctNum.textContent=pct;pctBar.style.right=(100-pct)+'%';
-    if(pct>=85&&!doneShown){doneShown=true;hud.classList.add('done');hint.textContent='Panel corrected. Ready for coating.'}
+    if(pct>=85&&!doneShown){doneShown=true;hud.classList.add('done');hint.textContent='Corrected. Ready for coating'}
   }
   setInterval(measure,400);
 
