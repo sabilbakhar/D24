@@ -305,6 +305,39 @@ document.addEventListener('error',function(e){var t=e.target;if(t&&t.tagName==='
   @media (max-width:1000px){.steps{grid-template-columns:1fr 1fr}.step{border-right:0;border-bottom:1px solid var(--rule);min-height:0;padding:30px 0}.step + .step{padding-left:0}.step:nth-child(odd){padding-right:26px;border-right:1px solid var(--rule)}.step:nth-child(even){padding-left:26px}.step:last-child{border-bottom:0}}
   @media (max-width:600px){.steps{grid-template-columns:1fr}.step:nth-child(odd){border-right:0;padding-right:0}.step:nth-child(even){padding-left:0}}
 
+  /* phones: services and process fold shut, one line each, tap to read.
+     .fold is a no-op on desktop; .tog is the button the script wraps around each title on phones. */
+  .fold,.fold > div{display:contents}
+  .tog{all:unset;display:block;box-sizing:border-box;width:100%;font:inherit;color:inherit;text-transform:inherit;letter-spacing:inherit;line-height:inherit;-webkit-tap-highlight-color:transparent}
+  @media (max-width:760px){
+    .row{padding:20px 0;gap:8px 16px;cursor:pointer}
+    .row:hover{padding-left:0}
+    .row:hover::before{transform:scaleY(0)}
+    .row.open::before{transform:scaleY(1)}
+    .row .code{padding-top:5px}
+    .row h3{font-size:24px}
+    .row h3 small{font-size:15px;margin-top:6px}
+    .row .time{padding-top:2px}
+    .steps{border-top:0}
+    .step,.step:nth-child(odd),.step:nth-child(even){display:grid;grid-template-columns:44px 1fr;gap:6px 16px;padding:20px 0;min-height:0}
+    .step:first-child{border-top:1px solid var(--rule)}
+    .step .n{font-size:30px;padding-top:1px}
+    .step h3{margin-top:0;font-size:22px;grid-column:2}
+    .step p{margin-top:0;font-size:15px}
+    .step .spec{padding-top:16px}
+    .fold{display:grid;grid-column:2;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease)}
+    .fold > div{display:block;min-height:0;overflow:hidden;visibility:hidden;opacity:0;transform:translateY(-4px);transition:visibility 0s .45s,opacity .3s,transform .3s var(--ease)}
+    .open .fold{grid-template-rows:1fr}
+    .open .fold > div{visibility:visible;opacity:1;transform:none;transition:visibility 0s,opacity .35s .1s,transform .45s var(--ease)}
+    .row .fold p{margin:4px 0 10px}
+    .step .fold p{margin-top:6px}
+    .step .fold .spec{padding-bottom:4px}
+    .tog{cursor:pointer;position:relative;padding-right:34px}
+    .tog::after{content:"";position:absolute;right:8px;top:9px;width:10px;height:10px;border-right:1px solid var(--copper);border-bottom:1px solid var(--copper);transform:rotate(45deg);transition:transform .3s var(--ease),top .3s var(--ease)}
+    .open .tog::after{transform:rotate(225deg);top:15px}
+    .tog:focus-visible{outline:1px solid var(--copper);outline-offset:6px}
+  }
+
   /* work: mosaic */
   .work{background:var(--soot);border-block:1px solid var(--rule)}
   .mosaic{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:clamp(150px,18vw,240px);gap:14px}
@@ -527,42 +560,54 @@ document.addEventListener('error',function(e){var t=e.target;if(t&&t.tagName==='
         <article class="row">
           <div class="code">PC</div>
           <h3>Paint correction<small>One-step gloss enhancement to full multi-stage</small></h3>
-          <p>Machine polishing that removes swirls, holograms, water etching and light scratches from the clear coat, then refines the surface to a true mirror finish. Measured, staged, and stopped before it costs you paint.</p>
+          <div class="fold"><div>
+            <p>Machine polishing that removes swirls, holograms, water etching and light scratches from the clear coat, then refines the surface to a true mirror finish. Measured, staged, and stopped before it costs you paint.</p>
+          </div></div>
           <div class="time"><b>1 to 3 days</b>Priced on inspection</div>
           <div class="arrow"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </article>
         <article class="row">
           <div class="code">CC</div>
           <h3>Ceramic coating<small>9H professional-grade, layered</small></h3>
-          <p>A hard, hydrophobic layer bonded to corrected paint. Sheds water and grime, resists chemical etching and UV fade, and keeps the finish easy to maintain for years rather than weeks. Always applied after correction, never over it.</p>
+          <div class="fold"><div>
+            <p>A hard, hydrophobic layer bonded to corrected paint. Sheds water and grime, resists chemical etching and UV fade, and keeps the finish easy to maintain for years rather than weeks. Always applied after correction, never over it.</p>
+          </div></div>
           <div class="time"><b>2 to 3 days</b>Includes 24 h cure</div>
           <div class="arrow"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </article>
         <article class="row">
           <div class="code">PPF</div>
           <h3>Paint protection film<small>Self-healing, optically clear or satin</small></h3>
-          <p>A thick urethane film over the panels that take the hits: bonnet, bumper, mirrors, sills, door edges, or the whole car. Stone chips, key scuffs and door dings land on the film, not the paint. Edges tucked, seams hidden.</p>
+          <div class="fold"><div>
+            <p>A thick urethane film over the panels that take the hits: bonnet, bumper, mirrors, sills, door edges, or the whole car. Stone chips, key scuffs and door dings land on the film, not the paint. Edges tucked, seams hidden.</p>
+          </div></div>
           <div class="time"><b>2 to 5 days</b>Front kit to full body</div>
           <div class="arrow"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </article>
         <article class="row">
           <div class="code">ID</div>
           <h3>Interior detailing<small>Deep clean, leather care, fabric protection</small></h3>
-          <p>Seats out where needed. Steam, extraction and brushes in every vent, seam and seat rail. Leather cleaned and conditioned, plastics restored to matte, glass cleared inside. The car smells of nothing, which is the point.</p>
+          <div class="fold"><div>
+            <p>Seats out where needed. Steam, extraction and brushes in every vent, seam and seat rail. Leather cleaned and conditioned, plastics restored to matte, glass cleared inside. The car smells of nothing, which is the point.</p>
+          </div></div>
           <div class="time"><b>1 day</b>Half day for maintenance</div>
           <div class="arrow"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </article>
         <article class="row">
           <div class="code">EB</div>
           <h3>Engine bay &amp; headlights<small>Degrease, dress, restore clarity</small></h3>
-          <p>Engine bay degreased with electrics protected, then dressed to a clean factory look. Yellowed, hazy headlights wet sanded, polished and sealed with UV protection so the clarity stays.</p>
+          <div class="fold"><div>
+            <p>Engine bay degreased with electrics protected, then dressed to a clean factory look. Yellowed, hazy headlights wet sanded, polished and sealed with UV protection so the clarity stays.</p>
+          </div></div>
           <div class="time"><b>Half day</b>Add-on to any service</div>
           <div class="arrow"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </article>
         <article class="row">
           <div class="code">MW</div>
           <h3>Maintenance wash<small>For cars we've coated</small></h3>
-          <p>A proper two-bucket, pH-neutral wash with a coating top-up, so the work we did keeps doing its job. No brushes, no automatic tunnels, no swirls.</p>
+          <div class="fold"><div>
+            <p>A proper two-bucket, pH-neutral wash with a coating top-up, so the work we did keeps doing its job. No brushes, no automatic tunnels, no swirls.</p>
+          </div></div>
           <div class="time"><b>90 minutes</b>Monthly plans available</div>
           <div class="arrow"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </article>
@@ -584,11 +629,11 @@ document.addEventListener('error',function(e){var t=e.target;if(t&&t.tagName==='
         <p class="copy rv">Detailing is a sequence, and skipping a stage shows up months later as a coating that peels or a scratch that comes back. This is the order every car goes through here.</p>
       </div>
       <ol class="steps rv" style="list-style:none;padding:0;margin:0">
-        <li class="step"><div class="n">1</div><h3>Inspection</h3><p>Paint depth read on every panel, defects mapped under LED and swirl-finder light, plan agreed with you before anything starts.</p><div class="spec">Clear coat typical<br><b>35 to 50 µm</b></div></li>
-        <li class="step"><div class="n">2</div><h3>Decontamination</h3><p>Foam, two-bucket wash, iron remover, tar remover, clay. The surface is chemically and physically clean before a pad touches it.</p><div class="spec">Wash chemistry<br><b>pH neutral</b></div></li>
-        <li class="step"><div class="n">3</div><h3>Correction</h3><p>Compounding and polishing in stages, checked panel by panel. We remove the least paint that gives the finish you asked for.</p><div class="spec">Paint removed<br><b>Under 5 µm</b></div></li>
-        <li class="step"><div class="n">4</div><h3>Protection</h3><p>Panel wipe, then coating or film. Applied in a dust-controlled bay, levelled by hand, and left to cure. Nothing gets wet for a day.</p><div class="spec">Initial cure<br><b>24 hours</b></div></li>
-        <li class="step"><div class="n">5</div><h3>Handover</h3><p>Final inspection with you, under the same lights we started with. You leave with a care sheet and a wash schedule that suits the coast.</p><div class="spec">First maintenance<br><b>2 weeks</b></div></li>
+        <li class="step"><div class="n">1</div><h3>Inspection</h3><div class="fold"><div><p>Paint depth read on every panel, defects mapped under LED and swirl-finder light, plan agreed with you before anything starts.</p><div class="spec">Clear coat typical<br><b>35 to 50 µm</b></div></div></div></li>
+        <li class="step"><div class="n">2</div><h3>Decontamination</h3><div class="fold"><div><p>Foam, two-bucket wash, iron remover, tar remover, clay. The surface is chemically and physically clean before a pad touches it.</p><div class="spec">Wash chemistry<br><b>pH neutral</b></div></div></div></li>
+        <li class="step"><div class="n">3</div><h3>Correction</h3><div class="fold"><div><p>Compounding and polishing in stages, checked panel by panel. We remove the least paint that gives the finish you asked for.</p><div class="spec">Paint removed<br><b>Under 5 µm</b></div></div></div></li>
+        <li class="step"><div class="n">4</div><h3>Protection</h3><div class="fold"><div><p>Panel wipe, then coating or film. Applied in a dust-controlled bay, levelled by hand, and left to cure. Nothing gets wet for a day.</p><div class="spec">Initial cure<br><b>24 hours</b></div></div></div></li>
+        <li class="step"><div class="n">5</div><h3>Handover</h3><div class="fold"><div><p>Final inspection with you, under the same lights we started with. You leave with a care sheet and a wash schedule that suits the coast.</p><div class="spec">First maintenance<br><b>2 weeks</b></div></div></div></li>
       </ol>
     </div>
   </section>
@@ -716,6 +761,25 @@ document.addEventListener('error',function(e){var t=e.target;if(t&&t.tagName==='
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
     document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
   }
+
+  // services and process: on phones the descriptions fold shut behind the title
+  var foldMq=matchMedia('(max-width:760px)');
+  function buildFolds(){
+    if(!foldMq.matches||buildFolds.done)return;buildFolds.done=true;
+    document.querySelectorAll('.menu .row, .steps .step').forEach(function(item,i){
+      var h=item.querySelector('h3'),fold=item.querySelector('.fold');if(!h||!fold)return;
+      fold.id='fold-'+i;
+      var b=document.createElement('button');b.type='button';b.className='tog';
+      b.setAttribute('aria-expanded','false');b.setAttribute('aria-controls',fold.id);
+      while(h.firstChild)b.appendChild(h.firstChild);h.appendChild(b);
+      function toggle(){var o=item.classList.toggle('open');b.setAttribute('aria-expanded',o)}
+      b.addEventListener('click',function(e){e.stopPropagation();toggle()});
+      // the whole collapsed line is the tap target, not just the title
+      item.addEventListener('click',function(e){if(foldMq.matches&&!fold.contains(e.target))toggle()});
+    });
+  }
+  buildFolds();
+  if(foldMq.addEventListener)foldMq.addEventListener('change',buildFolds);else if(foldMq.addListener)foldMq.addListener(buildFolds);
 
   /* ---------- hero (car version): a photographed car you polish back to gloss ----------
      #paint = the car as it leaves: the photograph, full colour and gloss
