@@ -1,6 +1,6 @@
 {
   "version": "0.0.1",
   "configurations": [
-    { "name": "d24-site", "runtimeExecutable": "python3", "runtimeArgs": ["-m", "http.server", "8765", "--directory", "site"], "port": 8765 }
+    { "name": "d24-site", "runtimeExecutable": "sh", "runtimeArgs": ["-c", "python3 -m http.server ${PORT:-8765} --directory site"], "port": 8765, "autoPort": true }
   ]
 }
