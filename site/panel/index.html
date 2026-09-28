@@ -3,6 +3,25 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q8230BEMX6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Q8230BEMX6');
+  // Count the clicks that matter: WhatsApp, phone, email, Instagram, the estimate builder
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]'); if (!a) return;
+    var h = a.getAttribute('href') || '', ev = null;
+    if (a.id === 'est-send') ev = 'send_estimate';
+    else if (h.indexOf('wa.me') > -1) ev = 'click_whatsapp';
+    else if (h.indexOf('tel:') === 0) ev = 'click_call';
+    else if (h.indexOf('mailto:') === 0) ev = 'click_email';
+    else if (h.indexOf('instagram.com') > -1) ev = 'click_instagram';
+    if (ev) gtag('event', ev, { link_text: (a.textContent || '').trim().slice(0, 60) });
+  }, true);
+</script>
 <title>D24 Studio | Car Detailing, Ceramic Coating &amp; PPF in Mangaluru</title>
 <meta name="description" content="D24 Studio is an automobile detailing studio in Pandeshwar, Mangaluru. Paint correction, ceramic coating, paint protection film (PPF), interior detailing and headlight restoration, done by hand and by appointment.">
 <meta name="keywords" content="car detailing Mangaluru, ceramic coating Mangalore, PPF Mangaluru, paint protection film, paint correction, interior detailing, D24 Studio, Pandeshwar">
